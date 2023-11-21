@@ -1,6 +1,7 @@
 package locations;
 
 import java.util.List;
+import java.util.ArrayList
 import characters.Characters;
 public abstract class Locations {
     private static final boolean DEFAULT_STATE = true;
@@ -23,3 +24,11 @@ public abstract class Locations {
         return this.people;
     }
 }
+    public void  enter (int val){
+
+        size.listExit
+                for i<size
+                if val = i
+                then setcharpos(exit.nextloc)
+
+    }
