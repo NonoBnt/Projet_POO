@@ -9,11 +9,11 @@ public abstract class Locations {
     private List<Characters> people ;
     private boolean State;
 
-    public void addChar(){
-        //a faire
+    public void addChar(people P){
+        this.people.add(P)
     }
-    public void addExits(){
-        //a faire
+    public void addExits(exits E){
+        this.exits.add(E)
     }
 
     public List<Exits> getExits(){
