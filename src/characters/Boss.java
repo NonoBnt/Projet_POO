@@ -1,6 +1,7 @@
 package characters;
 
-import locations.Locations;
+import items.*;
+import locations.*;
 
 public class Boss extends Characters{
     private int HP;
@@ -8,7 +9,7 @@ public class Boss extends Characters{
     private int damage;
     private Locations pos;
     private Weapon weapon;
-    private Shield shield;
+    private Armor shield;
     private Inventory backpack;
 
     public Boss(){

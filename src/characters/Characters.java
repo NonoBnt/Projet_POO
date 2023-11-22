@@ -1,7 +1,7 @@
 package characters;
 
 import items.*;
-import locations.Locations;
+import locations.*;
 
 public abstract class Characters {
     private int HP;
@@ -9,15 +9,22 @@ public abstract class Characters {
     private int damage;
     private Locations pos;
     private Weapon weapon;
-    private Shield shield;
+    private Armor shield;
     private Inventory backpack;
 
-    public void attack(Items item, Characters ennemi){
-        ennemi.HP = ennemi.HP - ((this.weapon.damage + this.damage) - ennemi.shield.damage);
+    public int getHP() {
+        return this.HP;
     }
 
-    public void special(){                                              // a faire
-        //a faire
+    public void setHP(int i){
+        this.HP = i;
     }
 
+    public Armor getShield() {
+        return this.shield;
+    }
+
+    public int getDamage() {
+        return this.damage;
+    }
 }

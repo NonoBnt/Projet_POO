@@ -1,4 +1,15 @@
 package items;
 
-public class Items {
+abstract public class Items {
+    private String name;
+
+    private int weight;
+
+    private int durability;
+
+
+    public abstract void use();
+    public abstract int getWeight();
+    public abstract String getName();
+
 }

@@ -1,6 +1,7 @@
 package characters;
 
-import locations.Locations;
+import items.*;
+import locations.*;
 
 public class Monster extends PNJ{
     private int HP = 20;
@@ -8,7 +9,7 @@ public class Monster extends PNJ{
     private int damage = 5;
     private Locations pos;
     private Weapon weapon;
-    private Shield shield;
+    private Armor shield;
     private Inventory backpack;
 
     public Monster(){
