@@ -22,4 +22,12 @@ public abstract class Locations {
     public List<Characters> getCharacters(){
         return this.people;
     }
+    public void  enter (int val){
+
+        size.listExit
+                for i<size
+                if val = i
+                then setcharpos(exit.nextloc)
+
+    }
 }
