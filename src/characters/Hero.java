@@ -4,16 +4,23 @@ import items.*;
 import locations.*;
 
 public class Hero extends Characters{
-    private final int HP = 100;
+    private static final int MIN_HP = 50;
+    private static final int MAX_HP = 400;
+    private int HP;
     private final String name = "Hero";
     private final int damage = 10;
     private Locations pos;
     private Weapon weapon;
     private Armor shield;
     private Inventory backpack;
-    public Hero(){
+
+
+    public Hero(Locations loc){
+        this.HP = (MIN_HP + (int)(Math.random() * (( MAX_HP- MIN_HP )+1)));
         this.weapon = null;
         this.shield = null;
+        this.backpack = null;
+        this.pos = loc;
     }
 
     public void attack(Items item, Characters ennemi){

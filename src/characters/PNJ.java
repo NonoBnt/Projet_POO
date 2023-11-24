@@ -15,4 +15,6 @@ public abstract class PNJ extends Characters{
     public void talk(){
         //a faire
     }
+
+
 }
