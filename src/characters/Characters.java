@@ -27,4 +27,7 @@ public abstract class Characters {
     public int getDamage() {
         return this.damage;
     }
+    public Inventory getInv(){
+        return this.backpack;
+    }
 }

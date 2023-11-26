@@ -1,5 +1,7 @@
 package items;
 import java.util.ArrayList;
+import items.Key;
+import items.Items;
 public class Inventory {
     private ArrayList<Items> items = new ArrayList<>();
     private int length;
@@ -30,6 +32,27 @@ public class Inventory {
     public void clearInv(){
         this.items = new ArrayList<>();
     }
+    public boolean isKey(){
+        boolean flag = false;
+        for (int i = 0; i < this.length;i++){
+            if (this.items.get(i) instanceof Key){
+                flag = true;       
+            }
+        }
+		return flag;
+		
+    }
+
+    public Items getFirstInstanceItems(String name){
+        Items ret = null;
+        for (int i = 0; i < this.length;i++){
+            if (this.items.get(i).getName() == name && ret == null){
+                ret = this.items.get(i);      
+            }
+        }return ret;
+    }
+        
+    
     //possible problème si plusieurs fois le même item dans l'inventaire
     public void delItems(Items i){
         if (!this.items.remove(i)){

@@ -22,6 +22,9 @@ public class Hero extends Characters{
         this.backpack = null;
         this.pos = loc;
     }
+    public void theirIskey(){
+        backpack.isKey();
+    }
 
     public void attack(Items item, Characters ennemi){
         if(ennemi.getHP() <= 0){
