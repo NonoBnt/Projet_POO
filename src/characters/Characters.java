@@ -30,4 +30,7 @@ public abstract class Characters {
     public Inventory getInv(){
         return this.backpack;
     }
+    public String getName(){
+        return this.name;
+    }
 }

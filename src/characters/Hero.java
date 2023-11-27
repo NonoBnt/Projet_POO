@@ -29,7 +29,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
         return backpack.isKey();
     }
 
-    public void attack(Items item, Characters ennemi){
+    public void attack(Characters ennemi){
         if(ennemi.getHP() <= 0){
             System.out.println("You try to fight against " + ennemi.getClass().getSimpleName() + "but he has no hp.");
             System.out.println("Your attack has choke.");
@@ -77,8 +77,12 @@ public class Hero extends Characters implements Attack, Use, Talk{
     }
 	@Override
 	public void attack(String ennemy) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'attack'");
+        Characters vilain = pos.getTargetInRoom(ennemy);
+        if (vilain == null){
+            System.out.println("Aucune cible dans la pièce");
+        }else{
+            attack(vilain);
+        } 
 	}
     @Override
     public void use(String item) {
@@ -87,8 +91,13 @@ public class Hero extends Characters implements Attack, Use, Talk{
     }
     @Override
     public void talk(String pnj) {
-       if (this.pos.isHumanInLoc(pos)){
-            Characters human = this.pos.getHumanInLoc(pos);
+       if (this.pos.isHumanInLoc(pos, pnj)){
+            Human human = this.pos.getHumanInLoc(pos);
+            human.interact();
+       }
+       if (this.pos.isChestInLoc(pos, pnj)){
+            Chest chest = this.pos.getChestInLoc(pos);
+            chest.interact(); 
        }
     }
 }

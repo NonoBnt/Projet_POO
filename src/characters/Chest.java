@@ -4,7 +4,7 @@ import Actions.Talk;
 import items.*;
 import locations.*;
 
-public class Chest extends PNJ implements Talk{
+public class Chest extends PNJ {
     private final int HP = 2000;
     private final String name = "Chest";
     private final int damage = 0;
@@ -22,8 +22,7 @@ public class Chest extends PNJ implements Talk{
         // a faire
     }
 
-	@Override
-	public void talk(String pnj) {
+	public void interact() {
 		System.out.println("Cling Cling(Traduction : this item is yours only if you want!)");
 	}
 }

@@ -5,7 +5,7 @@ import items.*;
 import locations.*;
 
 
-public class Human extends PNJ implements Talk{
+public class Human extends PNJ{
     private static final int MIN_HP = 5;
     private static final int MAX_HP = 25;
     private static final int MIN_DAMAGE = 5;
@@ -48,8 +48,8 @@ public class Human extends PNJ implements Talk{
 
     }
 
-	@Override
-	public void talk() {
+	
+	public void interact() {
         if (this.hasSpoke == false){
             int rand = (int)Math.random()%10;
             switch (rand) {
@@ -89,7 +89,7 @@ public class Human extends PNJ implements Talk{
                     this.hasSpoke = true;
                     break;
                 case 8:
-                    System.out.println("We are here");
+                    System.out.println("We are just here");
                     this.hasSpoke = true;
                     break;
                 case 9:

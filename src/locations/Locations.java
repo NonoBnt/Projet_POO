@@ -8,6 +8,7 @@ import java.util.Map;
 
 import characters.Boss;
 import characters.Characters;
+import characters.Chest;
 import characters.Human;
 import characters.Monster;
 import items.*;
@@ -52,31 +53,51 @@ public class Locations {
     public List<Characters> getHero(){
         return this.peoples;
     }
-    public boolean isHumanInLoc(Locations loc){
+    public boolean isHumanInLoc(Locations loc, String name){
         boolean ret = false;
-		for (int i = 0; i < peoples.size(); i++){
-            if (peoples.get(i) instanceof Human){
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Human && peoples.get(i).getName == name){
                 ret = true;
             }
         }
         return ret;
     }
 
-    public Characters getHumanInLoc(Locations loc){
-        Characters ret = null;
-		for (int i = 0; i < peoples.size(); i++){
+    public Human getHumanInLoc(Locations loc){
+        Human ret = null;
+		for (int i = 0; i < this.peoples.size(); i++){
             if (peoples.get(i) instanceof Human){
-                ret = peoples.get(i);
+                ret = (Human) peoples.get(i);
             }
         }
         return ret;
     }
 
-    public boolean isChestInLoc(Locations loc){
+    public boolean isChestInLoc(Locations loc, String name){
         boolean ret = false;
-		for (int i = 0; i < peoples.size(); i++){
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Chest && peoples.get(i).getName() == name){
+                ret = true;
+            }
+        }
+        return ret;
+    }
+
+    public Chest getChestInLoc(Locations loc){
+        Chest ret = null;
+		for (int i = 0; i < this.peoples.size(); i++){
             if (peoples.get(i) instanceof Chest){
-                ret = true;
+                ret = (Chest) peoples.get(i);
+            }
+        }
+        return ret;
+    }
+
+    public Characters getTargetInRoom(String name){
+        Characters ret = null;
+        for(int i = 0; i < this.peoples.size();i++){
+            if (this.peoples.get(i).getName() == name){
+                ret = this.peoples.get(i);
             }
         }
         return ret;

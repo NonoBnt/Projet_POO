@@ -47,11 +47,15 @@ public class Game{
             arg = cmd.split("\\s+");
             switch (arg[0]) {
                 case "GO":
-                    
+                    // appel enter en vérifiant que arg 1 est bien présent
                     break;
                 case "HELP":
-                    System.out.println("Dans cette salle vous pouvez :");
-                    if 
+                    System.out.println("In this room you can use command :");
+                    if(isExitInLoc()){//fonction a faire
+                        System.out.println("- GO arg1 (arg1 is the number of the next room you want and can go)");    
+                    }
+                    System.out.println("- LOOK [argument] (argument is optionnal and with it you can have information on anything in the current room. If you don't give argument you will get all the possible argument with their utility)");
+                    // a finir
                     break;
                 case "LOOK":
                     
@@ -63,11 +67,11 @@ public class Game{
                     //interface
                     break;
                 case "ATTACK":
-                    //interface
+                    //appel attack via hero ou interface je sais pas
 
                     break;
                 case "TALK":
-                    //interface
+                    //appel talk via hero ou interface je sais pas
                     break;        
                 case "QUIT":
                     System.out.println("Arret du jeu");
@@ -78,11 +82,14 @@ public class Game{
                     System.out.println("Commande inconnue");
                     break;
             }
-            if (this.charac.get(0).getHP() <= 0){
+            if (this.hero.getHP() <= 0){
                 System.out.println("Game Over");
                 quit();
             }
-            if (this.loc)
+            if (isClear(this.loc.get(this.loc.size()))){ // fonction a faire
+                System.out.println("You Win !");
+                quit();
+            }
         }
         scanner.close();
     }
