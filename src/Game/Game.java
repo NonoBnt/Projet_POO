@@ -10,32 +10,23 @@ import java.util.Scanner;
 
 public class Game{
     private ArrayList<Locations> loc;
-    private ArrayList<Characters> charac;
+    private Hero hero;
     private boolean stop;
 
 
     public Game(){
         this.loc = new ArrayList<>();
-        this.charac = new ArrayList<>();
+        this.hero = new Hero(this.loc.get(0));
         this.stop = false;
     }
     public void createMap(){
         //a faire
     }
-    public void createCharac(){
-
-    }
-    public void help(){
-        // a faire
-    }
     public void look(){
 
     }
-    public void look(Locations loc){
-        
-    }
     public void take(Items i){
-        Inventory Inv = this.charac.get(0).getInv();
+        Inventory Inv = this.hero.getInv();
         Inv.addItems(i);
     }
     public void quit(){
@@ -45,22 +36,22 @@ public class Game{
 
     }
 
-    public void createGame(){
-        createCharac();
-        createMap();
-    }
+    
     public void launch(){
-        createGame();
+        createMap();
+        String[] arg;
+        Scanner scanner = new Scanner(System.in);
         while(this.stop != true){
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Please enter your command :");
             String cmd = scanner.nextLine();
-            switch (cmd) {
+            arg = cmd.split("\\s+");
+            switch (arg[0]) {
                 case "GO":
                     
                     break;
                 case "HELP":
                     System.out.println("Dans cette salle vous pouvez :");
+                    if 
                     break;
                 case "LOOK":
                     
@@ -69,8 +60,15 @@ public class Game{
                     
                     break;
                 case "USE":
-                    
+                    //interface
                     break;
+                case "ATTACK":
+                    //interface
+
+                    break;
+                case "TALK":
+                    //interface
+                    break;        
                 case "QUIT":
                     System.out.println("Arret du jeu");
                     quit();
@@ -80,7 +78,13 @@ public class Game{
                     System.out.println("Commande inconnue");
                     break;
             }
+            if (this.charac.get(0).getHP() <= 0){
+                System.out.println("Game Over");
+                quit();
+            }
+            if (this.loc)
         }
+        scanner.close();
     }
 
 }

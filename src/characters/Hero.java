@@ -1,9 +1,12 @@
 package characters;
 
+import java.util.Map;
+
+import Actions.*;
 import items.*;
 import locations.*;
 
-public class Hero extends Characters{
+public class Hero extends Characters implements Attack, Use, Talk{
     private static final int MIN_HP = 50;
     private static final int MAX_HP = 400;
     private int HP;
@@ -22,8 +25,8 @@ public class Hero extends Characters{
         this.backpack = null;
         this.pos = loc;
     }
-    public void theirIskey(){
-        backpack.isKey();
+    public boolean theirIskey(){
+        return backpack.isKey();
     }
 
     public void attack(Items item, Characters ennemi){
@@ -40,5 +43,52 @@ public class Hero extends Characters{
             }
         }
 
+    }
+    public void enter(String location){
+        Map<String,Exits> exits = this.pos.getExits();
+        if(exits.containsKey(location)){
+            Exits exit = exits.get(location);
+            if(exit.getkey() == true){
+                if(theirIskey() == true){
+                pos.delChar(this);
+                this.pos = exit.getNextloc();  
+                pos.addChar(this);
+                
+
+                }
+                else{
+                    System.out.println("You don’t have the key, you can’t go in! Maybe there’s one in another room ");
+                }
+
+
+
+            }
+            else {
+
+            }
+
+        }
+        else {
+            System.out.println("error, please enter a valid exit, use LOOK to know the different exits");
+        }
+
+         
+    }
+    }
+	@Override
+	public void attack(String ennemy) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'attack'");
+	}
+    @Override
+    public void use(String item) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'use'");
+    }
+    @Override
+    public void talk(String pnj) {
+       if (this.pos.isHumanInLoc(pos)){
+            Characters human = this.pos.getHumanInLoc(pos);
+       }
     }
 }
