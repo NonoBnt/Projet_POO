@@ -145,12 +145,12 @@ public class Hero extends Characters implements Attack, Use, Talk{
     @Override
     public void use(String item) {
        if (this.backpack.getFirstInstanceItems(item) instanceof Apple){
-            this.HP += Items.Consumable.Apple.getHeal();
+            this.HP += this.backpack.getFirstAppleInItem().getHeal();
             this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
        }
        else{ 
             if(this.backpack.getFirstInstanceItems(item) instanceof HealPotion){
-                this.HP += this.backpack.getFirstInstanceItems(item).getHeal();
+                this.HP += this.backpack.getFirstHealPotionInItem().getHeal();
                 this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
             }
             else{

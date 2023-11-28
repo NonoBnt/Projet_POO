@@ -1,6 +1,6 @@
 package items;
 import java.util.ArrayList;
-import items.Key;
+
 import items.*;
 public class Inventory {
     private ArrayList<Items> items = new ArrayList<>();
@@ -43,6 +43,24 @@ public class Inventory {
         }
 		return flag;
 		
+    }
+
+    public Apple getFirstAppleInItem(){
+        Apple ret = null;
+        for (int i = 0; i < this.length;i++){
+            if (this.items.get(i) instanceof Apple && ret == null){
+                ret = (Apple) this.items.get(i);      
+            }
+        }return ret;
+    }
+
+    public HealPotion getFirstHealPotionInItem(){
+        HealPotion ret = null;
+        for (int i = 0; i < this.length;i++){
+            if (this.items.get(i) instanceof HealPotion && ret == null){
+                ret = (HealPotion) this.items.get(i);      
+            }
+        }return ret;
     }
 
     public Items getFirstInstanceItems(String name){
