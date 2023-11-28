@@ -1,6 +1,8 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import locations.*;
 import characters.*;
@@ -12,6 +14,8 @@ public class Game{
     private ArrayList<Locations> loc;
     private Hero hero;
     private boolean stop;
+    private Exits  exit = addExits(new Locations("a"),new Exits("go_to_2", false, new Locations("b")));
+
 
     public Game(){
         this.loc = new ArrayList<>();
@@ -22,6 +26,7 @@ public class Game{
     public void createMap(){
         Locations S1 = new Locations("Normal 1");
         this.loc.add(0,S1);
+
 
         Locations S2 = new Locations("Monster 1");
         Monster M1 = new Monster(S2);
@@ -144,6 +149,8 @@ public class Game{
             switch (arg[0]) {
                 case "GO":
                     // appel enter en vérifiant que arg 1 est bien présent
+                    if((arg.length) == 2){
+                    }
                     break;
                 case "HELP":
                     System.out.println("In this room you can use command :");
@@ -151,7 +158,7 @@ public class Game{
                         System.out.println("- GO arg1 (arg1 is the number of the next room you want and can go)");    
                     }
                     System.out.println("- LOOK [argument] (argument is optionnal and with it you can have information on anything in the current room. If you don't give argument you will get all the possible argument with their utility)");
-                    if(this.hero.getHeroLoc().isChestInLoc() == true || this.hero.getHeroLoc().isChestInLoc() == true && this.hero.getHeroLoc().getChestInLoc().){
+                    if(this.hero.getHeroLoc().isChestInLoc() == true || this.hero.getHeroLoc().isChestInLoc() == true && this.hero.getHeroLoc().getChestInLoc()){
                         System.out.println("- TALK");
                     }
                     break;
@@ -186,7 +193,6 @@ public class Game{
                 case "ATTACK":
                     if ((arg.length) == 2){
                         this.hero.attack(arg[1]);
-                        if(people instanceof Monster || people instanceof Human || people instanceof Boss)
                     }else{
                         System.out.println("Il ne se passe rien");
                     }

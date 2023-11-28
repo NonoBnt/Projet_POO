@@ -116,6 +116,8 @@ public class Locations {
     public void setState(){
         this.state = false;
     }
-
+    public Boolean isClear(Locations loc){
+        return (peoples.get(1)).getHP() <= 0;
+    }
     
 }

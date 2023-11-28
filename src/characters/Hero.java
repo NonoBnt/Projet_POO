@@ -39,7 +39,6 @@ public class Hero extends Characters implements Attack, Use, Talk{
     public Inventory getInv(){
         return this.backpack;
     }
-
     public void attack(Characters ennemi){
         if(ennemi.getHP() <= 0){
             System.out.println("You try to fight against " + ennemi.getClass().getSimpleName() + "but he has no hp.");
@@ -92,6 +91,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
             }
             if(ennemi.getHP() <=0){
                 System.out.println("You beat " + ennemi.getClass().getSimpleName() + "!");
+                pos.setState();
             }
         }
     }
