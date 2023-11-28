@@ -21,11 +21,12 @@ public class Locations {
     private List<Characters> peoples ;
     private boolean state;
 
-    public Locations(String name){
+    public Locations(String name,boolean state ){
         this.Name = name;
         this.Description ="You’re in"+name+", what do you want to do?";
         this.state = DEFAULT_STATE;
         this.peoples = new ArrayList<>(2);
+        this.state = state;
     }
 
     // Les fonctions add/del 

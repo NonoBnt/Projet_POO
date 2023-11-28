@@ -1,7 +1,7 @@
 package items;
 import java.util.ArrayList;
 import items.Key;
-import items.Items;
+import items.*;
 public class Inventory {
     private ArrayList<Items> items = new ArrayList<>();
     private int length;
@@ -93,7 +93,7 @@ public class Inventory {
             length += 1;
         }
     }
-    public ArrayList<Items> getInv(){
+    public ArrayList<Items> getItems(){
         return this.items;
     }
     // a voir : l'unité de messure de la masse (pas grandement important)

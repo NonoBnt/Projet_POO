@@ -18,8 +18,14 @@ public class Chest extends PNJ {
         this.chestitItems = items;
     }
 
-    public void exchange(){
-        // a faire
+    public Items getItem(){
+        if (this.chestitItems == null){
+            System.out.println("coffre vide");
+            return this.chestitItems;
+        }
+        else{
+            return this.chestitItems;
+        }
     }
 
 	public void interact() {

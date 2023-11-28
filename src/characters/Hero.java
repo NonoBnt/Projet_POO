@@ -137,18 +137,25 @@ public class Hero extends Characters implements Attack, Use, Talk{
         Characters vilain = pos.getTargetInRoom(ennemy);
         if (vilain == null){
             System.out.println("This target is not in this room");
-        }else{
+        }
+        else{
             attack(vilain);
         } 
 	}
     @Override
     public void use(String item) {
        if (this.backpack.getFirstInstanceItems(item) instanceof Apple){
-            this.HP += 10;
+            this.HP += Items.Consumable.Apple.getHeal();
             this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
-       }else{
-            this.HP += 30;
-            this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+       }
+       else{ 
+            if(this.backpack.getFirstInstanceItems(item) instanceof HealPotion){
+                this.HP += this.backpack.getFirstInstanceItems(item).getHeal();
+                this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+            }
+            else{
+                System.out.println("you can't use that here !");
+            }
        }
     }
     @Override

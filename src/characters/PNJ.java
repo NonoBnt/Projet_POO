@@ -11,9 +11,4 @@ public abstract class PNJ extends Characters{
     private Weapon weapon;
     private Armor shield;
 
-    public void talk(){
-        //a faire
-    }
-
-
 }
