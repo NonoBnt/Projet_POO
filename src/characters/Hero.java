@@ -46,36 +46,39 @@ public class Hero extends Characters implements Attack, Use, Talk{
     }
     public void enter(String location){
         Map<String,Exits> exits = this.pos.getExits();
-        if(exits.containsKey(location)){
-            Exits exit = exits.get(location);
-            if(exit.getkey() == true){
-                if(theirIskey() == true){
-                pos.delChar(this);
-                this.pos = exit.getNextloc();  
-                pos.addChar(this);
-                
-
+        if(pos.getState() == false){
+            if(exits.containsKey(location)){
+                Exits exit = exits.get(location);
+                if(exit.getkey() == true){
+                    if(theirIskey() == true){
+                        exit.useKey();
+                        this.backpack.delFirstKey();
+                        pos.delChar(this);
+                        this.pos = exit.getNextloc();  
+                        pos.addChar(this);
+                        System.out.println(pos.getDes());
+                    }
+                    else{
+                        System.out.println("You don’t have the key, you can’t go in! Maybe there’s one in another room ");
+                    }
                 }
-                else{
-                    System.out.println("You don’t have the key, you can’t go in! Maybe there’s one in another room ");
+                else {
+                    pos.delChar(this);
+                    this.pos = exit.getNextloc();  
+                    pos.addChar(this);
+                    System.out.println(pos.getDes());
                 }
-
-
-
             }
             else {
-
-            }
-
+            System.out.println("error, please enter a valid exit, use LOOK to know the different exits");
+            } 
         }
         else {
-            System.out.println("error, please enter a valid exit, use LOOK to know the different exits");
-        }
-
-         
+            System.out.println("! There’s a monster! You can’t change rooms until you defeat it");
+        }   
     }
-    }
-	@Override
+	
+    @Override
 	public void attack(String ennemy) {
         Characters vilain = pos.getTargetInRoom(ennemy);
         if (vilain == null){
@@ -86,8 +89,22 @@ public class Hero extends Characters implements Attack, Use, Talk{
 	}
     @Override
     public void use(String item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'use'");
+       if (this.backpack.getFirstInstanceItems(item) instanceof Apple){
+            this.HP += 10;
+            this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+       }else-if(this.backpack.getFirstInstanceItems(item) instanceof HealPotion){
+            this.HP += 30;
+            this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+       }else-if(this.backpack.getFirstInstanceItems(item) instanceof Weapon){
+            if (this.weapon != null){
+                this.weapon.use();
+                if (this.weapon.isBroke()){
+                    this.weapon = null;
+                }
+            }else{
+                
+            }
+       }
     }
     @Override
     public void talk(String pnj) {

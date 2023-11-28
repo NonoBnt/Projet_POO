@@ -16,16 +16,20 @@ import items.*;
 public class Locations {
     private static final boolean DEFAULT_STATE = true;
     private final String Name;
+    private final String Description;
     private Map<String,Exits> exits = new HashMap<>();
     private List<Characters> peoples ;
-    private boolean State;
+    private boolean state;
 
     public Locations(String name,int loc){
         this.Name = name;
-        this.State = DEFAULT_STATE;
+        this.Description ="You’re in"+name+", what do you want to do?";
+        this.state = DEFAULT_STATE;
         this.peoples = new ArrayList<>(2);
     }
 
+    // Les fonctions add/del 
+    //----------------------------------------------------------------------------------
     public void addChar(Characters people){
         if(people instanceof Monster || people instanceof Human || people instanceof Boss){
             peoples.add(1,people);
@@ -36,14 +40,21 @@ public class Locations {
             peoples.remove(1);
         } else peoples.remove(0);
     }
-    public String getName(){
-        return this.Name;
-    }
-    
     public void addExits(Locations loc,Exits exit){
         exits.put(loc.getName(),exit);
     }
 
+    //Les fonctions getter
+    //----------------------------------------------------------------------------------
+    public String getName(){
+        return this.Name;
+    }
+    public String getDes(){
+        return this.Description;
+    }
+    public boolean getState(){
+        return this.state;
+    }
     public Map<String,Exits> getExits(){
         return exits;
     }
@@ -53,16 +64,6 @@ public class Locations {
     public List<Characters> getHero(){
         return this.peoples;
     }
-    public boolean isHumanInLoc(Locations loc, String name){
-        boolean ret = false;
-		for (int i = 0; i < this.peoples.size(); i++){
-            if (peoples.get(i) instanceof Human && peoples.get(i).getName == name){
-                ret = true;
-            }
-        }
-        return ret;
-    }
-
     public Human getHumanInLoc(Locations loc){
         Human ret = null;
 		for (int i = 0; i < this.peoples.size(); i++){
@@ -72,17 +73,6 @@ public class Locations {
         }
         return ret;
     }
-
-    public boolean isChestInLoc(Locations loc, String name){
-        boolean ret = false;
-		for (int i = 0; i < this.peoples.size(); i++){
-            if (peoples.get(i) instanceof Chest && peoples.get(i).getName() == name){
-                ret = true;
-            }
-        }
-        return ret;
-    }
-
     public Chest getChestInLoc(Locations loc){
         Chest ret = null;
 		for (int i = 0; i < this.peoples.size(); i++){
@@ -92,7 +82,6 @@ public class Locations {
         }
         return ret;
     }
-
     public Characters getTargetInRoom(String name){
         Characters ret = null;
         for(int i = 0; i < this.peoples.size();i++){
@@ -103,26 +92,30 @@ public class Locations {
         return ret;
     }
 
-   
 
-    public void enter (int val){
-        Inventory Inv = this.peoples.get(0).getInv();
-        for (int i = 0; i < s;i++) {
-            if (val == i) {
-                if(exits.get(i).getkey() == 0){ 
-                    (numLoc) = (i); 
-                    addChar(peoples.get(0));
-                }
-                if(exits.get(i).getkey() == 1){
-                    if(peoples.get(0).Hero.theirIskey() == false){
-                        System.out.println("you need a key to open this door");                    
-                    }
-                    else {
-                        exits.get(i).usekey();
-                        Inventory.delItems()
-                    }
-                }
+    // Les autres fonctions
+    //----------------------------------------------------------------------------------
+    public boolean isHumanInLoc(Locations loc, String name){
+        boolean ret = false;
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Human && peoples.get(i).getName() == name){
+                ret = true;
             }
         }
+        return ret;
     }
+    public boolean isChestInLoc(Locations loc, String name){
+        boolean ret = false;
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Chest && peoples.get(i).getName() == name){
+                ret = true;
+            }
+        }
+        return ret;
+    }
+    public void setState(){
+        this.state = false;
+    }
+
+    
 }

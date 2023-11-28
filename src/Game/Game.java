@@ -72,6 +72,13 @@ public class Game{
                     break;
                 case "TALK":
                     //appel talk via hero ou interface je sais pas
+                    break;
+                case "DELETE":
+                    if (arg.length) == 2{
+                    try this.hero.getInv().delFirstInstanceOfItem(arg[1]);
+                    }else{
+                        System.out.println("missing argument item to delete");
+                    }
                     break;        
                 case "QUIT":
                     System.out.println("Arret du jeu");

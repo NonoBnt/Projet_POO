@@ -51,6 +51,17 @@ public class Inventory {
             }
         }return ret;
     }
+
+     public void delFirstKey(){
+        Key key = getFirstInstanceItems("Key");
+        if (!this.items.remove(key)){
+            System.out.println("There is not an item like this in your backpack");
+        }else{
+            this.items.remove(key);
+            length -= 1;
+        }
+
+    }
         
     
     //possible problème si plusieurs fois le même item dans l'inventaire
@@ -62,6 +73,10 @@ public class Inventory {
             length -= 1;
         }
 
+    }
+
+    public void delFirstInstanceOfItem(String name){
+        delItems(getFirstInstanceItems(name));
     }
     // Idée : faire le test dans avant d'appeler la fonction pour ne pas faire disparaitre l'item a récuperer
     public void addItems(Items i){
