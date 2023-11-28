@@ -10,7 +10,7 @@ public abstract class Characters {
     private Locations pos;
     private Weapon weapon;
     private Armor shield;
-    private Inventory backpack;
+    
 
     public int getHP() {
         return this.HP;

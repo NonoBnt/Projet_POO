@@ -16,7 +16,6 @@ public class Human extends PNJ{
     private Locations pos;
     private Weapon weapon;
     private Armor shield;
-    private Inventory backpack;
     private Boolean hasSpoke;
 
     public Human(String n, Locations loc){

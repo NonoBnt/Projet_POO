@@ -11,11 +11,11 @@ public class Chest extends PNJ {
     private Locations pos;
     private final Weapon weapon = null;
     private final Armor shield = null;
-    private Inventory backpack;
+    private Items chestitItems;
 
-    public Chest (Locations loc,  Inventory items){
+    public Chest (Locations loc,  Items items){
         this.pos = loc;
-        this.backpack = items;
+        this.chestitItems = items;
     }
 
     public void exchange(){

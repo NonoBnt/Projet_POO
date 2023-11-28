@@ -17,8 +17,7 @@ public class Weapon extends Items {
         return this.durability <= 0;
     }
 
-    @Override
-    public void use() {
+    public void loseDurability() {
         this.durability -= 1;
     }
 

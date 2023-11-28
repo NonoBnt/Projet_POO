@@ -14,7 +14,6 @@ public class Monster extends PNJ{
     private Locations pos;
     private Weapon weapon;
     private Armor shield;
-    private Inventory backpack;
 
     public Monster(Locations loc){
         this.HP = (MIN_HP + (int)(Math.random() * ((MAX_HP - MIN_HP )+1)));

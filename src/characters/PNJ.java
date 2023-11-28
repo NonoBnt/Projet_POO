@@ -10,7 +10,6 @@ public abstract class PNJ extends Characters{
     private Locations pos;
     private Weapon weapon;
     private Armor shield;
-    private Inventory backpack;
 
     public void talk(){
         //a faire

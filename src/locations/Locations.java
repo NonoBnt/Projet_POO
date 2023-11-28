@@ -11,7 +11,7 @@ import characters.Characters;
 import characters.Chest;
 import characters.Human;
 import characters.Monster;
-import items.*;
+
 
 public class Locations {
     private static final boolean DEFAULT_STATE = true;
@@ -21,7 +21,7 @@ public class Locations {
     private List<Characters> peoples ;
     private boolean state;
 
-    public Locations(String name,int loc){
+    public Locations(String name){
         this.Name = name;
         this.Description ="You’re in"+name+", what do you want to do?";
         this.state = DEFAULT_STATE;

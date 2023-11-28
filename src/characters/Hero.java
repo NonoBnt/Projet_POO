@@ -35,9 +35,20 @@ public class Hero extends Characters implements Attack, Use, Talk{
             System.out.println("Your attack has choke.");
         } else {
             System.out.println("You are fighting against " + ennemi.getClass().getSimpleName() + ".");
-            int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
+            if(this.weapon == null){
+                int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
+                
+                System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+            }
+            else {
+                int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
             System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+            weapon.loseDurability();
+            if(this.weapon.isBroke()){
+                this.weapon = null;
+            }
             ennemi.setHP(ennemi.getHP() - Newdamage);
+            }
             if(ennemi.getHP() <=0){
                 System.out.println("You beat " + ennemi.getClass().getSimpleName() + "!");
             }
@@ -82,7 +93,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
 	public void attack(String ennemy) {
         Characters vilain = pos.getTargetInRoom(ennemy);
         if (vilain == null){
-            System.out.println("Aucune cible dans la pièce");
+            System.out.println("This target is not in this room");
         }else{
             attack(vilain);
         } 
@@ -92,18 +103,9 @@ public class Hero extends Characters implements Attack, Use, Talk{
        if (this.backpack.getFirstInstanceItems(item) instanceof Apple){
             this.HP += 10;
             this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
-       }else-if(this.backpack.getFirstInstanceItems(item) instanceof HealPotion){
+       }else{
             this.HP += 30;
             this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
-       }else-if(this.backpack.getFirstInstanceItems(item) instanceof Weapon){
-            if (this.weapon != null){
-                this.weapon.use();
-                if (this.weapon.isBroke()){
-                    this.weapon = null;
-                }
-            }else{
-                
-            }
        }
     }
     @Override

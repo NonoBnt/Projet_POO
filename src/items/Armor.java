@@ -18,11 +18,6 @@ public class Armor extends Items {
     }
 
     @Override
-    public void use() {
-        this.durability -= 1;
-    }
-
-    @Override
     public int getWeight() {
         return this.weight;
     }

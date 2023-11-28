@@ -7,9 +7,11 @@ public class Inventory {
     private int length;
     private static final int MAX_WEIGHT = 100;
     private static final int MAX_LENGTH = 15;
+
     public Inventory(){
         this.length = 0;
     }
+    
     public boolean isFull(){
         return length >= MAX_LENGTH;
     }
@@ -53,7 +55,7 @@ public class Inventory {
     }
 
      public void delFirstKey(){
-        Key key = getFirstInstanceItems("Key");
+        Items key = getFirstInstanceItems("Key");
         if (!this.items.remove(key)){
             System.out.println("There is not an item like this in your backpack");
         }else{

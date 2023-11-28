@@ -8,7 +8,7 @@ abstract public class Items {
     private int durability;
 
 
-    public abstract void use();
+    
     public abstract int getWeight();
     public abstract String getName();
 
