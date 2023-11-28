@@ -95,19 +95,19 @@ public class Locations {
 
     // Les autres fonctions
     //----------------------------------------------------------------------------------
-    public boolean isHumanInLoc(Locations loc, String name){
+    public boolean isHumanInLoc(){
         boolean ret = false;
 		for (int i = 0; i < this.peoples.size(); i++){
-            if (peoples.get(i) instanceof Human && peoples.get(i).getName() == name){
+            if (peoples.get(i) instanceof Human ){
                 ret = true;
             }
         }
         return ret;
     }
-    public boolean isChestInLoc(Locations loc, String name){
+    public boolean isChestInLoc(){
         boolean ret = false;
 		for (int i = 0; i < this.peoples.size(); i++){
-            if (peoples.get(i) instanceof Chest && peoples.get(i).getName() == name){
+            if (peoples.get(i) instanceof Chest ){
                 ret = true;
             }
         }

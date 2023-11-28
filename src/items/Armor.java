@@ -16,6 +16,10 @@ public class Armor extends Items {
     public boolean isBroke(){
         return this.durability <= 0;
     }
+    
+    public void loseDurability() {
+        this.durability -= 1;
+    }
 
     @Override
     public int getWeight() {

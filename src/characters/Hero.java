@@ -25,36 +25,77 @@ public class Hero extends Characters implements Attack, Use, Talk{
         this.backpack = null;
         this.pos = loc;
     }
+    public void setShieldNull(){
+        this.shield = null; 
+    }
     public boolean theirIskey(){
         return backpack.isKey();
+    }
+
+    public Locations getHeroLoc(){
+        return this.pos;
+    }
+
+    public Inventory getInv(){
+        return this.backpack;
     }
 
     public void attack(Characters ennemi){
         if(ennemi.getHP() <= 0){
             System.out.println("You try to fight against " + ennemi.getClass().getSimpleName() + "but he has no hp.");
             System.out.println("Your attack has choke.");
-        } else {
+        } 
+        else {
             System.out.println("You are fighting against " + ennemi.getClass().getSimpleName() + ".");
             if(this.weapon == null){
-                int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
-                
-                System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                if(ennemi.getShield() == null){
+                    int Newdamage = (this.damage);
+                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    ennemi.setHP(ennemi.getHP() - Newdamage);
+                }
+                else {
+                    int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
+                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    ennemi.getShield().loseDurability();
+                    if(ennemi.getShield().isBroke()){
+                        ennemi.setShieldNull();
+                        System.out.println("Yeah he broke his shield!");
+                    }
+                    ennemi.setHP(ennemi.getHP() - Newdamage);
+                }
             }
             else {
-                int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
-            System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
-            weapon.loseDurability();
-            if(this.weapon.isBroke()){
-                this.weapon = null;
-            }
-            ennemi.setHP(ennemi.getHP() - Newdamage);
+                if(ennemi.getShield() == null){
+                    int Newdamage = (this.weapon.getDamage() + this.damage);
+                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    weapon.loseDurability();
+                    if(this.weapon.isBroke()){
+                        this.weapon = null;
+                        System.out.println("Be careful you broke your weapon.");
+                    }
+                    ennemi.setHP(ennemi.getHP() - Newdamage);
+                }
+                else {
+                    int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
+                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    weapon.loseDurability();
+                    if(this.weapon.isBroke()){
+                        this.weapon = null;
+                        System.out.println("Be careful you broke your weapon.");
+                    }
+                    if(ennemi.getShield().isBroke()){
+                        ennemi.setShieldNull();
+                        System.out.println("Yeah he broke his shiel!");
+                    }
+                    ennemi.setHP(ennemi.getHP() - Newdamage);   
+                }
             }
             if(ennemi.getHP() <=0){
                 System.out.println("You beat " + ennemi.getClass().getSimpleName() + "!");
             }
         }
-
     }
+    
     public void enter(String location){
         Map<String,Exits> exits = this.pos.getExits();
         if(pos.getState() == false){
@@ -88,6 +129,8 @@ public class Hero extends Characters implements Attack, Use, Talk{
             System.out.println("! There’s a monster! You can’t change rooms until you defeat it");
         }   
     }
+
+    
 	
     @Override
 	public void attack(String ennemy) {
@@ -109,13 +152,13 @@ public class Hero extends Characters implements Attack, Use, Talk{
        }
     }
     @Override
-    public void talk(String pnj) {
-       if (this.pos.isHumanInLoc(pos, pnj)){
-            Human human = this.pos.getHumanInLoc(pos);
+    public void talk() {
+       if (this.pos.isHumanInLoc()==true){
+            Human human = this.pos.getHumanInLoc(this.pos);
             human.interact();
        }
-       if (this.pos.isChestInLoc(pos, pnj)){
-            Chest chest = this.pos.getChestInLoc(pos);
+       if (this.pos.isChestInLoc()){
+            Chest chest = this.pos.getChestInLoc(this.pos);
             chest.interact(); 
        }
     }

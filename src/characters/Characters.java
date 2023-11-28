@@ -23,13 +23,14 @@ public abstract class Characters {
     public Armor getShield() {
         return this.shield;
     }
+    public void setShieldNull(){
+        this.shield = null; 
+    }
 
     public int getDamage() {
         return this.damage;
     }
-    public Inventory getInv(){
-        return this.backpack;
-    }
+    
     public String getName(){
         return this.name;
     }

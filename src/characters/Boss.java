@@ -23,27 +23,51 @@ public class Boss extends Characters{
     }
 
     public void attack(Characters ennemi){
-        int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
-        System.out.println(ennemi.getClass().getSimpleName() + "hit you and cause" + Newdamage + "damage to you.");
-        ennemi.setHP(ennemi.getHP() - Newdamage);
+        if(this.weapon == null){
+            if(ennemi.getShield() == null){
+                int Newdamage = (this.damage);
+                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                ennemi.setHP(ennemi.getHP() - Newdamage);
+            }
+            else {
+                int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
+                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                ennemi.getShield().loseDurability();
+                if(ennemi.getShield().isBroke()){
+                    ennemi.setShieldNull();
+                    System.out.println("Be careful he broke your shield.");
+                }
+                ennemi.setHP(ennemi.getHP() - Newdamage);
+            }
+        }
+        else {
+            if(ennemi.getShield() == null){
+                int Newdamage = (this.weapon.getDamage() + this.damage);
+                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                weapon.loseDurability();
+                if(this.weapon.isBroke()){
+                    this.weapon = null;
+                    System.out.println("Yeah he broke his weapon!.");
+                }
+                ennemi.setHP(ennemi.getHP() - Newdamage);
+            }
+            else {
+                int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
+                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                weapon.loseDurability();
+                if(this.weapon.isBroke()){
+                    this.weapon = null;
+                    System.out.println("Yeah he broke his weapon!.");
+                }
+                if(ennemi.getShield().isBroke()){
+                    ennemi.setShieldNull();
+                    System.out.println("Be careful he broke your shield.");
+                }
+                ennemi.setHP(ennemi.getHP() - Newdamage);   
+            }
+        }
         if(ennemi.getHP() <=0){
             System.out.println(ennemi.getClass().getSimpleName() + " beat you!\n");
         }
-
     }
-    public void Heroattack(Characters ennemi){
-        if(ennemi.getHP() <= 0){
-            System.out.println("You try to fight against " + ennemi.getClass().getSimpleName() + "but he has no hp.");
-            System.out.println("Your attack has choke.");
-        } else {
-            System.out.println("You are fighting against " + ennemi.getClass().getSimpleName() + ".");
-            int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
-            System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
-            ennemi.setHP(ennemi.getHP() - Newdamage);
-            if(ennemi.getHP() <=0){
-                System.out.println("You beat " + ennemi.getClass().getSimpleName() + "!");
-            }
-        }
-
-    }
-}
+}     
