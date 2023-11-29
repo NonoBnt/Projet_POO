@@ -33,13 +33,13 @@ public class Locations {
     //----------------------------------------------------------------------------------
     public void addChar(Characters people){
         if(people instanceof Monster || people instanceof Human || people instanceof Boss){
-            peoples.add(1,people);
+            peoples.add(people);
         } else peoples.add(0, people);
     }
     public void delChar(Characters people){
         if(people instanceof Monster || people instanceof Human || people instanceof Boss){
-            peoples.remove(1);
-        } else peoples.remove(0);
+            peoples.remove(0);
+        } else peoples.remove(1);
     }
     public void addExits(Locations loc,Exits exit){
         exits.put(loc.getName(),exit);

@@ -4,6 +4,8 @@ import Game.Game;
 import characters.*;
 import locations.*;
 import items.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +13,9 @@ public class Main {
         g.createMap();
         Hero h = g.getHero();
         Locations loc = h.getHeroLoc();
+        System.out.println(loc.getName());
+        //Map<String,Exits> exit = loc.getExits();
+        h.enter("salle_2");
         System.out.println(loc.getName());
     }
 }

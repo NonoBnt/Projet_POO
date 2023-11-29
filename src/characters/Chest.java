@@ -1,6 +1,5 @@
 package characters;
 
-import Actions.Talk;
 import items.*;
 import locations.*;
 

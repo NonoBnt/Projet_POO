@@ -17,7 +17,8 @@ public class Game{
 
 
     public Game(){
-        this.loc = new ArrayList<>();
+        this.loc = new ArrayList<>(23);
+        this.createMap();
         this.hero = new Hero(this.loc.get(0));
         this.stop = false;
     }
@@ -27,7 +28,7 @@ public class Game{
 
     public void createMap(){
         Locations S1 = new Locations("Room_1",false);
-        this.loc.add(0,S1);Locations locate = this.hero.getHeroLoc();
+        this.loc.add(0,S1);
         
         Locations S2 = new Locations("Room_2",true);
         Monster M1 = new Monster(S2);
@@ -104,24 +105,24 @@ public class Game{
         S18.addChar(M10);
         this.loc.add(17,S18);
         
-        Locations S19 = new Locations("Room_23",true);
+        Locations S19 = new Locations("Room_19",true);
         Boss B1 = new Boss(S19);
         S19.addChar(B1);;
         this.loc.add(18,S19);
 
-        Locations S20 = new Locations("Room_19",true);
+        Locations S20 = new Locations("Room_20",true);
         this.loc.add(19,S20);
 
-        Locations S21 = new Locations("Room_20",false);
+        Locations S21 = new Locations("Room_21",false);
         this.loc.add(20,S21);
 
-        Locations S22 = new Locations("Room_21",false);
+        Locations S22 = new Locations("Room_22",false);
         Weapon W1 = new Weapon("Legendary sword", 0, 50, 10);
         Chest C2 = new Chest(S22, W1);
         S22.addChar(C2);
         this.loc.add(21,S22);
 
-        Locations S23 = new Locations("Room_22",false);
+        Locations S23 = new Locations("Room_23",false);
         Boss B2 = new Boss(S22);
         S23.addChar(B2);;
         this.loc.add(22,S22);
@@ -193,6 +194,28 @@ public class Game{
         Exits EXT22 = new Exits("salle_8", false, S8);
         S10.addExits(S10, EXT22);
 
+        Exits EXT23 = new Exits("salle_12", false, S12);
+        S11.addExits(S11, EXT23);
+
+        Exits EXT24 = new Exits("salle_1", false, S1);
+        S12.addExits(S12, EXT24);
+
+        Exits EXT25 = new Exits("salle_4", false, S4);
+        S13.addExits(S13, EXT25);
+
+        Exits EXT26 = new Exits("salle_14", false, S14);
+        S13.addExits(S13, EXT26);
+
+        Exits EXT27 = new Exits("salle_8", false, S8);
+        S14.addExits(S14, EXT27);
+
+        Exits EXT28 = new Exits("salle_8", false, S8);
+        S14.addExits(S14, EXT28);
+
+        Exits EXT29 = new Exits("salle_8", false, S8);
+        S14.addExits(S14, EXT29);
+
+        
     }
 
     public void take(Items i){
