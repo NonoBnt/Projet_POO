@@ -1,10 +1,10 @@
 package Test;
 
-import items.Key;
+import items.Exitkey;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class KeyT(){
+public class ExitkeyT(){
 
     @Test
     public void testObjectKey(){

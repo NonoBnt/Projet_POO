@@ -113,7 +113,7 @@ public class Human extends PNJ{
                     break;
                 case 3:
                     System.out.println("I got this key for you ! Do you want it ?");
-                    this.backpack.addItems(new Key());
+                    this.backpack.addItems(new Exitkey());
                     this.hasSpoke = true;
                     break;
                 case 4:

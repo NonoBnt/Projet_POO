@@ -38,7 +38,7 @@ public class Inventory {
     public boolean isKey(){
         boolean flag = false;
         for (int i = 0; i < this.length;i++){
-            if (this.items.get(i) instanceof Key){
+            if (this.items.get(i) instanceof Exitkey){
                 flag = true;       
             }
         }
