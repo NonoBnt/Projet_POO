@@ -32,8 +32,11 @@ public class Inventory {
     public boolean isTooMuchWeight(Items i){
         return (getTotalWeight() + i.getWeight()) >= MAX_WEIGHT;
     }
-    public void clearInv(){
+    /*public void clearInv(){
         this.items = new ArrayList<>();
+    }*/
+    public int getSpace(){
+        return this.length;
     }
     public boolean isKey(){
         boolean flag = false;

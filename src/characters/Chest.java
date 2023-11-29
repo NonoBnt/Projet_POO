@@ -4,7 +4,7 @@ import items.*;
 import locations.*;
 
 public class Chest extends PNJ {
-    private final int HP = 2000;
+    private int HP = 2000;
     private final String name = "Chest";
     private final int damage = 0;
     private Locations pos;
@@ -16,9 +16,13 @@ public class Chest extends PNJ {
         this.pos = loc;
         this.chestitItems = items;
     }
-
+    @Override
     public int getHP() {
         return this.HP;
+    }
+    @Override
+    public void setHP(int i) {
+        this.HP = i;
     }
 
     public Items getItem(){
@@ -34,4 +38,9 @@ public class Chest extends PNJ {
 	public void interact() {
 		System.out.println("Cling Cling(Traduction : this item is yours only if you want!)");
 	}
+    @Override
+    public void printChar(){
+        int realDamage = (this.damage + this.weapon.getDamage());
+        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
+    }
 }

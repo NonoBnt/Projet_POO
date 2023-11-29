@@ -24,8 +24,29 @@ public class InventoryT(){
         assertEquals(inv1.getTotalWeight(), key.getWeight());
     }
     @Test
+    public void testIsTooMuchWeight1(){
+        Inventory inv1 = new Inventory();
+        assertFalse(inv1.isTooMuchWeight());
+    }
+    public void testIsTooMuchWeight2(){
+        Inventory inv1 = new Inventory();
+        inv1.addItems(new Weapon("test", 10000, 1, 0));
+        assertTrue(inv1.isTooMuchWeight());
+    }
+    public void testIsTooMuchWeight3(){
+        Inventory inv1 = new Inventory();
+        Weapon test = new Weapon("test", 10000, 1, 0);
+        assertTrue(inv1.isTooMuchWeight(test));
+    }
+    @Test
     public void testIsFull1(){
         Inventory inv1 = new Inventory();
+        assertFalse(inv1.isFull());
+    }
+    @Test
+    public void testIsFull2(){
+        Inventory inv1 = new Inventory();
+        
         assertFalse(inv1.isFull());
     }
 

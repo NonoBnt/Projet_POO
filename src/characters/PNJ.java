@@ -11,4 +11,11 @@ public abstract class PNJ extends Characters{
     private Weapon weapon;
     private Armor shield;
 
+
+    public abstract int getHP();
+
+    public abstract void setHP(int i);
+
+    public abstract void printChar();
 }
+

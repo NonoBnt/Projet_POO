@@ -20,8 +20,13 @@ public class Monster extends PNJ{
         this.damage = ( MIN_DAMAGE + (int)(Math.random() * ((MAX_DAMAGE - MIN_DAMAGE )+1)));
         this.pos = loc;
     }
+    @Override
     public int getHP() {
         return this.HP;
+    }
+    @Override
+    public void setHP(int i) {
+        this.HP = i;
     }
 
     public void attack(Characters ennemi){
@@ -71,6 +76,11 @@ public class Monster extends PNJ{
         if(ennemi.getHP() <=0){
             System.out.println(ennemi.getClass().getSimpleName() + " beat you!\n");
         }
+    }
+    @Override
+    public void printChar(){
+        int realDamage = (this.damage + this.weapon.getDamage());
+        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
     }
 }
 

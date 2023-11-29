@@ -25,9 +25,13 @@ public class Hero extends Characters implements Attack, Use, Talk{
         this.backpack = new Inventory();
         this.pos = loc;
     }
-
+    @Override
     public int getHP() {
         return this.HP;
+    }
+    @Override
+    public void setHP(int i) {
+        this.HP = i;
     }
 
     public void setShieldNull(){
@@ -173,5 +177,10 @@ public class Hero extends Characters implements Attack, Use, Talk{
             Chest chest = this.pos.getChestInLoc(this.pos);
             chest.interact(); 
        }
+    }
+    @Override
+    public void printChar(){
+        int realDamage = (this.damage + this.weapon.getDamage());
+        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
     }
 }

@@ -259,8 +259,15 @@ public class Game{
                         System.out.println("- TAKE (You can take the items own by the PNJ in front of you by using this command !)");
                     }
                     if(this.hero.getInv().getFirstInstanceItems("Apple") != null || this.hero.getInv().getFirstInstanceItems("HealPotion") != null){
-                        System.out.println("- USE : this means you can use one Apple or HealPotion from your inventory");
-                    }                    
+                        System.out.println("- USE (this means you can use one Apple or HealPotion from your inventory)");
+                    }
+                    if(lochero.isCharInLoc()){
+                        System.out.println("- ATTACK(this function allow you to gave a sword or punch attack to try to kill him but he will respond with an attack too !)");
+                    }
+                    if(this.hero.getInv().getSpace() != 0){
+                        System.out.println("- DELETE(this function is used to delete the item you put in the second arguments and delete it from your inventory)");
+                    }
+                    System.out.println("- QUIT(left the game. Be careful there is no save !)");             
                     break;
                 case "LOOK":
                     if((arg.length) == 2){
@@ -277,7 +284,9 @@ public class Game{
                         System.out.println("");
                         
                         for(int i = 1 ; i < this.hero.getHeroLoc().getCharacters().size() ; i++){
-                            System.out.println(" -Character : " + this.hero.getHeroLoc().getCharacters().get(1));
+                            System.out.println(" -Character : "); 
+                            this.hero.getHeroLoc().getCharacters().get(1).printChar();
+                            System.out.println("");
                         }
                         System.out.println("You can use the argument INVENTORY to check your backpack !");
                     }
@@ -329,6 +338,7 @@ public class Game{
                     System.out.println("Commande inconnue");
                     break;
             }
+            System.out.println("");
             if (this.hero.getHP() <= 0){
                 System.out.println("Game Over");
                 quit();

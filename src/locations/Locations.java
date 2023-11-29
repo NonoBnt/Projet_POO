@@ -122,6 +122,16 @@ public class Locations {
         }
         return ret;
     }
+
+    public boolean isCharInLoc(){
+        boolean ret = false;
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Monster || peoples.get(i) instanceof Human || peoples.get(i) instanceof Chest || peoples.get(i) instanceof Boss){
+                ret = true;
+            }
+        }
+        return ret;
+    }
     public void setState(){
         this.state = false;
     }

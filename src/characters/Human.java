@@ -36,8 +36,13 @@ public class Human extends PNJ{
         this.hasSpoke = false;
     }
     
+    @Override
     public int getHP() {
         return this.HP;
+    }
+    @Override
+    public void setHP(int i) {
+        this.HP = i;
     }
 
     public void attack(Characters ennemi){
@@ -147,5 +152,10 @@ public class Human extends PNJ{
                 System.out.println("Don't speak to me again, I have nothing to tell you more !");
         }
 	}
+    @Override
+    public void printChar(){
+        int realDamage = (this.damage + this.weapon.getDamage());
+        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
+    }
 }
 
