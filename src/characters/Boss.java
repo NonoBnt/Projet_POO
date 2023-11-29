@@ -83,4 +83,10 @@ public class Boss extends Characters{
         int realDamage = (this.damage + this.weapon.getDamage());
         System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
     }
+    @Override
+    public String toString(){
+        int realDamage = (this.damage + this.weapon.getDamage());
+        String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        return s;
+    }
 }     

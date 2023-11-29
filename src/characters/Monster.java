@@ -84,6 +84,12 @@ public class Monster extends PNJ implements Attack{
         System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
     }
     @Override
+    public String toString(){
+        int realDamage = (this.damage + this.weapon.getDamage());
+        String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        return s;
+    }
+    @Override
     public void attack(String ennemy) {
         Characters hero = pos.getHero();
         if (hero == null){

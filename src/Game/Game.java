@@ -48,7 +48,6 @@ public class Game{
 
         Locations S5 = new Locations("Room_5");
         Monster M4 = new Monster(S5);
-
         S5.addChar(M4);
         this.loc.add(4,S5);
 
@@ -57,24 +56,31 @@ public class Game{
         S6.addChar(M5);
         this.loc.add(5,S6);
 
-        Locations S7 = new Locations("Room_7");
+        Locations S7 = new Locations("Room_7",false);
+        Human H1 = new Human("Isaac",S7);
+        S7.addChar(H1);
         this.loc.add(6,S7);
+        
 
         Locations S8 = new Locations("Room_8");
         Monster M6 = new Monster(S8);
         S8.addChar(M6);
         this.loc.add(7,S8);
 
-        Locations S9 = new Locations("Room_9");
+        Locations S9 = new Locations("Room_9",false);
+        Human H2 = new Human("Caïn",S9);
+        S9.addChar(H2);
         this.loc.add(8,S9);
 
-        Locations S10 = new Locations("Room_10");
+        Locations S10 = new Locations("Room_10",false);
         Armor A1 = new Armor("Legendary Armor", 0, 25, 3);
         Chest C1 = new Chest(S10, A1);
         S10.addChar(C1);
         this.loc.add(9,S10);
         
-        Locations S11 = new Locations("Room_11");
+        Locations S11 = new Locations("Room_11",false);
+        Human H3 = new Human("Judas",S11);
+        S11.addChar(H3);
         this.loc.add(10,S11);
 
         Locations S12 = new Locations("Room_12");
@@ -82,7 +88,9 @@ public class Game{
         S12.addChar(M7);
         this.loc.add(11,S12);
 
-        Locations S13 = new Locations("Room_13");
+        Locations S13 = new Locations("Room_13",false);
+        Human H4 = new Human("??? AKA BLUE BABBY",S13);
+        S13.addChar(H4);
         this.loc.add(12,S13);
 
         Locations S14 = new Locations("Room_14");
@@ -90,10 +98,14 @@ public class Game{
         S14.addChar(M8);
         this.loc.add(13,S14);
 
-        Locations S15 = new Locations("Room_15");
+        Locations S15 = new Locations("Room_15",false);
+        Human H5 = new Human("Magdala",S15);
+        S15.addChar(H5);
         this.loc.add(14,S15);
-
-        Locations S16 = new Locations("Room_16");
+        
+        Locations S16 = new Locations("Room_16",false);
+        Human H6 = new Human("Samson",S16);
+        S16.addChar(H6);
         this.loc.add(15,S16);
 
         Locations S17 = new Locations("Room_17");
@@ -111,10 +123,14 @@ public class Game{
         S19.addChar(B1);;
         this.loc.add(18,S19);
 
-        Locations S20 = new Locations("Room_20");
+        Locations S20 = new Locations("Room_20",false);
+        Human H7 = new Human("Lazarus",S20);
+        S20.addChar(H7);
         this.loc.add(19,S20);
 
-        Locations S21 = new Locations("Room_21");
+        Locations S21 = new Locations("Room_21",false);
+        Human H8 = new Human("Azazel",S21);
+        S21.addChar(H8);
         this.loc.add(20,S21);
 
         Locations S22 = new Locations("Room_22");
@@ -239,7 +255,7 @@ public class Game{
             Locations lochero = this.hero.getHeroLoc();
             System.out.print("Please enter your command :");
             String cmd = scanner.nextLine();
-            arg = cmd.split("\\s+");
+            arg = cmd.split(" ");
             switch (arg[0]) {
                 case "GO":
                     if((arg.length) == 2){
@@ -270,37 +286,49 @@ public class Game{
                     System.out.println("- QUIT(left the game. Be careful there is no save !)");             
                     break;
                 case "LOOK":
-                    if((arg.length) == 2){
-                        if(arg[1] == "INVENTORY"){
-                            this.hero.getInv().printInv();
-                        }    
-                    }else{
-                        System.out.println("Room information :");
-                        System.out.println("hero loc : " + this.hero.getHeroLoc().getName());
-                        Map<String,Exits> exits = this.hero.getHeroLoc().getExits();
-                        for(String i : exits.keySet()){
-                            System.out.println(" -Exits : " + i );
-                        }
-                        System.out.println("");
-                        
-                        for(int i = 1 ; i < this.hero.getHeroLoc().getCharacters().size() ; i++){
+                    if((arg.length) <= 2){
+                        if((arg.length) == 2){
+                            if(arg[1] == "INVENTORY"){
+                                this.hero.getInv().printInv();
+                            }    
+                        }else{
+                            System.out.println("Room information :");
+                            System.out.println("hero loc : " + this.hero.getHeroLoc().getName());
+                            Map<String,Exits> exits = this.hero.getHeroLoc().getExits();
+                            for(String i : exits.keySet()){
+                                System.out.println(" -Exits : " + i );
+                            }
+                            System.out.println("");
+                            //System.out.println(this.hero);
+                            
                             System.out.println(" -Character : ");
-                            if(lochero.isBossInLoc()){
-                                lochero.getBossInLoc(lochero).printChar();
+                            /*if(lochero.isBossInLoc()){
+                                //lochero.getBossInLoc(lochero).printChar();
+                                int realDamage = (lochero.getBossInLoc(lochero).getFullDamage());
+                                System.out.println(lochero.getBossInLoc(lochero).getName() + " : " + lochero.getBossInLoc(lochero).getHP() + " HP " + realDamage + " damage.");
                             } 
                             if(lochero.isChestInLoc()){
-                                lochero.getChestInLoc(lochero).printChar();
+                                //lochero.getChestInLoc(lochero).printChar();
+                                System.out.println(lochero.getChestInLoc(lochero).getName() + " : " + lochero.getChestInLoc(lochero).getHP() + " HP ");
                             } 
                             if(lochero.isHumanInLoc()){
-                                lochero.getHumanInLoc(lochero).printChar();
+                                //lochero.getHumanInLoc(lochero).printChar();
+                                int realDamage = (lochero.getHumanInLoc(lochero).getFullDamage());
+                                System.out.println(lochero.getHumanInLoc(lochero).getName() + " : " + lochero.getHumanInLoc(lochero).getHP() + " HP " + realDamage + " damage.");
                             } 
-                            if(lochero.isMonsterInLoc()){
-                                lochero.getMonsterInLoc(lochero).printChar();
-                            } 
+                                if(lochero.isMonsterInLoc()){
+                                //lochero.getMonsterInLoc(lochero).printChar();
+                                /*int realDamage = (lochero.getMonsterInLoc(lochero).getFullDamage());
+                                System.out.println(lochero.getMonsterInLoc(lochero).getName() + " : " + lochero.getMonsterInLoc(lochero).getHP() + " HP " + realDamage + " damage.");*/
+                            //}
                             System.out.println("");
+                            System.out.println("You can use the argument INVENTORY to check your backpack !");
                         }
-                        System.out.println("You can use the argument INVENTORY to check your backpack !");
                     }
+                    else{
+                        System.out.println("Too many argument");
+                    }
+                    break;
                 case "TAKE":
                     if(lochero.isChestInLoc() == true){
                         if (lochero.getChestInLoc(lochero).getItem() != null){
@@ -325,14 +353,15 @@ public class Game{
                 case "ATTACK":
                     if (lochero.getCharacters().size()==2){
                         this.hero.attack(this.hero.getHeroLoc().getCharacters().get(1).getName());
-                        if(lochero.isBossInLoc()){
-                        lochero.getBossInLoc(lochero).attack(this.hero);
+                        
+                        if(lochero.isBossInLoc() && lochero.getBossInLoc(lochero).getHP() > 0 ){
+                            lochero.getBossInLoc(lochero).attack(this.hero);
                         }
-                        if(lochero.isHumanInLoc()){
-                        lochero.getHumanInLoc(lochero).attack(this.hero);
+                        if(lochero.isHumanInLoc() && lochero.getHumanInLoc(lochero).getHP() > 0){
+                            lochero.getHumanInLoc(lochero).attack(this.hero);
                         }
-                        if(lochero.isMonsterInLoc()){
-                        lochero.getMonsterInLoc(lochero).attack(this.hero);
+                        if(lochero.isMonsterInLoc() &&  lochero.getMonsterInLoc(lochero).getHP() > 0){
+                            lochero.getMonsterInLoc(lochero).attack(this.hero);
                         }
 
                     }else{

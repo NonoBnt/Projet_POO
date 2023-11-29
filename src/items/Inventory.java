@@ -118,7 +118,6 @@ public class Inventory {
     public ArrayList<Items> getItems(){
         return this.items;
     }
-    // a voir : l'unité de messure de la masse (pas grandement important)
     public void printInv() {
         System.out.println("Backpack :");
         for(int i = 0 ; i < length ; i++){

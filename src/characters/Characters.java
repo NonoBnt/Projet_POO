@@ -28,6 +28,10 @@ public abstract class Characters {
     public int getDamage() {
         return this.damage;
     }
+
+    /*public int getFullDamage(){
+        return this.damage + this.weapon.getDamage();
+    }*/
     
     public String getName(){
         return this.name;
