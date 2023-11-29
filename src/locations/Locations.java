@@ -21,25 +21,33 @@ public class Locations {
     private List<Characters> peoples ;
     private boolean state;
 
-    public Locations(String name,boolean state ){
+    public Locations(String name){
         this.Name = name;
-        this.Description ="You’re in"+name+", what do you want to do?";
+        this.Description ="You’re in "+name+", what do you want to do?";
         this.state = DEFAULT_STATE;
         this.peoples = new ArrayList<>(2);
+    }
+
+    public Locations(String name, boolean state){
+        this.Name = name;
+        this.Description ="You’re in "+name+", what do you want to do?";
         this.state = state;
+        this.peoples = new ArrayList<>(2);
     }
 
     // Les fonctions add/del 
     //----------------------------------------------------------------------------------
     public void addChar(Characters people){
         if(people instanceof Monster || people instanceof Human || people instanceof Boss){
-            peoples.add(people);
-        } else peoples.add(0, people);
+            this.peoples.add(people);
+        } else this.peoples.add(0, people);
     }
     public void delChar(Characters people){
-        if(people instanceof Monster || people instanceof Human || people instanceof Boss){
-            peoples.remove(0);
-        } else peoples.remove(1);
+        if(this.exits.size() > 0){
+            if(people instanceof Monster || people instanceof Human || people instanceof Boss){
+                this.peoples.remove(1);
+            } else this.peoples.remove(0);
+        }
     }
     public void addExits(Locations loc,Exits exit){
         exits.put(loc.getName(),exit);
@@ -117,8 +125,11 @@ public class Locations {
     public void setState(){
         this.state = false;
     }
+
     public Boolean isClear(Locations loc){
-        return (peoples.get(1)).getHP() <= 0;
+        if(loc.state == true){
+            return false;
+        } else {return true;}
     }
     
 }

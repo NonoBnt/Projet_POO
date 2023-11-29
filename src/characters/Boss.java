@@ -22,6 +22,10 @@ public class Boss extends Characters{
         this.pos = loc;
     }
 
+    public int getHP() {
+        return this.HP;
+    }
+
     public void attack(Characters ennemi){
         if(this.weapon == null){
             if(ennemi.getShield() == null){

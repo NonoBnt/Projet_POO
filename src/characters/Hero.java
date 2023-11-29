@@ -22,9 +22,14 @@ public class Hero extends Characters implements Attack, Use, Talk{
         this.HP = (MIN_HP + (int)(Math.random() * (( MAX_HP- MIN_HP )+1)));
         this.weapon = null;
         this.shield = null;
-        this.backpack = null;
+        this.backpack = new Inventory();
         this.pos = loc;
     }
+
+    public int getHP() {
+        return this.HP;
+    }
+
     public void setShieldNull(){
         this.shield = null; 
     }
@@ -116,7 +121,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
                 }
                 else {
                     pos.delChar(this);
-                    this.pos = exit.getNextloc();  
+                    this.pos = exit.getNextloc();
                     pos.addChar(this);
                     System.out.println(pos.getDes());
                 }

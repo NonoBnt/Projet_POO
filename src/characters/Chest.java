@@ -17,6 +17,10 @@ public class Chest extends PNJ {
         this.chestitItems = items;
     }
 
+    public int getHP() {
+        return this.HP;
+    }
+
     public Items getItem(){
         if (this.chestitItems == null){
             System.out.println("coffre vide");

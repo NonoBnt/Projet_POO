@@ -4,7 +4,7 @@ public class Exits {
     private Locations nextLoc;
     private boolean key;
 
-    public Exits(String name,boolean key,Locations loc) {
+    public Exits(boolean key,Locations loc) {
         this.key = key;
         this.nextLoc = loc;
     }

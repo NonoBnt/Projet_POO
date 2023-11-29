@@ -21,6 +21,10 @@ public class Armor extends Items {
         this.durability -= 1;
     }
 
+    public int getDurability(){
+        return this.durability;
+    }
+
     @Override
     public int getWeight() {
         return this.weight;

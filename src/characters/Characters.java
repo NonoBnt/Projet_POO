@@ -12,9 +12,7 @@ public abstract class Characters {
     private Armor shield;
     
 
-    public int getHP() {
-        return this.HP;
-    }
+    public abstract int getHP();
 
     public void setHP(int i){
         this.HP = i;

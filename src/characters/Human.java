@@ -36,6 +36,10 @@ public class Human extends PNJ{
         this.hasSpoke = false;
     }
     
+    public int getHP() {
+        return this.HP;
+    }
+
     public void attack(Characters ennemi){
         if(this.weapon == null){
             if(ennemi.getShield() == null){

@@ -3,20 +3,21 @@ import java.util.ArrayList;
 
 
 public class Inventory {
-    private ArrayList<Items> items = new ArrayList<>();
+    private ArrayList<Items> items;
     private int length;
     private static final int MAX_WEIGHT = 100;
     private static final int MAX_LENGTH = 15;
 
     public Inventory(){
         this.length = 0;
+        this.items = new ArrayList<>();
     }
     
     public boolean isFull(){
-        return length >= MAX_LENGTH;
+        return this.length >= MAX_LENGTH;
     }
     public int getSpaceLeft(){
-        return MAX_LENGTH - length;
+        return MAX_LENGTH - this.length;
     }
     public int getTotalWeight(){
         int res = 0;

@@ -10,12 +10,13 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         Game g = new Game();
-        g.createMap();
-        Hero h = g.getHero();
-        Locations loc = h.getHeroLoc();
-        System.out.println(loc.getName());
-        //Map<String,Exits> exit = loc.getExits();
-        h.enter("salle_2");
-        System.out.println(loc.getName());
+        g.launch();
+        //g.createMap();
+        //Hero h = g.getHero();
+        //Locations loc = h.getHeroLoc();
+        ////System.out.println(loc.getName());
+        ////Map<String,Exits> exit = loc.getExits();
+        //h.enter("Room_2");
+        //System.out.println(h.getHeroLoc().getName());
     }
 }

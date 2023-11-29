@@ -20,6 +20,10 @@ public class Monster extends PNJ{
         this.damage = ( MIN_DAMAGE + (int)(Math.random() * ((MAX_DAMAGE - MIN_DAMAGE )+1)));
         this.pos = loc;
     }
+    public int getHP() {
+        return this.HP;
+    }
+
     public void attack(Characters ennemi){
         if(this.weapon == null){
             if(ennemi.getShield() == null){
