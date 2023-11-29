@@ -40,7 +40,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
     public Locations getHeroLoc(){
         return this.pos;
     }
-
+    
     public Inventory getInv(){
         return this.backpack;
     }
