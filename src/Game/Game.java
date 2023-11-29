@@ -284,8 +284,19 @@ public class Game{
                         System.out.println("");
                         
                         for(int i = 1 ; i < this.hero.getHeroLoc().getCharacters().size() ; i++){
-                            System.out.println(" -Character : "); 
-                            this.hero.getHeroLoc().getCharacters().get(1).printChar();
+                            System.out.println(" -Character : ");
+                            if(lochero.isBossInLoc()){
+                                lochero.getBossInLoc(lochero).printChar();
+                            } 
+                            if(lochero.isChestInLoc()){
+                                lochero.getChestInLoc(lochero).printChar();
+                            } 
+                            if(lochero.isHumanInLoc()){
+                                lochero.getHumanInLoc(lochero).printChar();
+                            } 
+                            if(lochero.isMonsterInLoc()){
+                                lochero.getMonsterInLoc(lochero).printChar();
+                            } 
                             System.out.println("");
                         }
                         System.out.println("You can use the argument INVENTORY to check your backpack !");
@@ -312,8 +323,18 @@ public class Game{
                     }
                     break;
                 case "ATTACK":
-                    if (this.hero.getHeroLoc().getCharacters().size()==2){
-                        this.hero.attack(this.hero.getHeroLoc().getCharacters().get(1));
+                    if (lochero.getCharacters().size()==2){
+                        this.hero.attack(this.hero.getHeroLoc().getCharacters().get(1).getName());
+                        if(lochero.isBossInLoc()){
+                        lochero.getBossInLoc(lochero).attack(this.hero);
+                        }
+                        if(lochero.isHumanInLoc()){
+                        lochero.getHumanInLoc(lochero).attack(this.hero);
+                        }
+                        if(lochero.isMonsterInLoc()){
+                        lochero.getMonsterInLoc(lochero).attack(this.hero);
+                        }
+
                     }else{
                         System.out.println("Il ne se passe rien");
                     }

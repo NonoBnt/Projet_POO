@@ -2,8 +2,9 @@ package characters;
 
 import items.*;
 import locations.*;
+import Actions.*;
 
-public class Monster extends PNJ{
+public class Monster extends PNJ implements Attack{
     private static final int MIN_HP = 5;
     private static final int MAX_HP = 25;
     private static final int MIN_DAMAGE = 5;
@@ -81,6 +82,16 @@ public class Monster extends PNJ{
     public void printChar(){
         int realDamage = (this.damage + this.weapon.getDamage());
         System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
+    }
+    @Override
+    public void attack(String ennemy) {
+        Characters hero = pos.getHero();
+        if (hero == null){
+            System.out.println("This target is not in this room");
+        }
+        else{
+            attack(hero);
+        } 
     }
 }
 

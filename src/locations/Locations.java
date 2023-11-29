@@ -11,6 +11,7 @@ import characters.Characters;
 import characters.Chest;
 import characters.Human;
 import characters.Monster;
+import characters.Hero;
 
 
 public class Locations {
@@ -70,8 +71,8 @@ public class Locations {
     public List<Characters> getCharacters(){
         return this.peoples;
     }
-    public List<Characters> getHero(){
-        return this.peoples;
+    public Hero getHero(){
+        return (Hero)this.peoples.get(0);
     }
     public Human getHumanInLoc(Locations loc){
         Human ret = null;
@@ -100,6 +101,25 @@ public class Locations {
         }
         return ret;
     }
+    public Monster getMonsterInLoc(Locations loc){
+        Monster ret = null;
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Monster){
+                ret = (Monster) peoples.get(i);
+            }
+        }
+        return ret;
+    }
+    public Boss getBossInLoc(Locations loc){
+        Boss ret = null;
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Boss){
+                ret = (Boss) peoples.get(i);
+            }
+        }
+        return ret;
+    }
+    
 
 
     // Les autres fonctions
@@ -127,6 +147,24 @@ public class Locations {
         boolean ret = false;
 		for (int i = 0; i < this.peoples.size(); i++){
             if (peoples.get(i) instanceof Monster || peoples.get(i) instanceof Human || peoples.get(i) instanceof Chest || peoples.get(i) instanceof Boss){
+                ret = true;
+            }
+        }
+        return ret;
+    }
+     public boolean isMonsterInLoc(){
+        boolean ret = false;
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Monster){
+                ret = true;
+            }
+        }
+        return ret;
+    }
+     public boolean isBossInLoc(){
+        boolean ret = false;
+		for (int i = 0; i < this.peoples.size(); i++){
+            if (peoples.get(i) instanceof Boss){
                 ret = true;
             }
         }

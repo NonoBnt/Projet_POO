@@ -95,7 +95,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
                         ennemi.setShieldNull();
                         System.out.println("Yeah he broke his shiel!");
                     }
-                    ennemi.setHP(ennemi.getHP() - Newdamage);   
+                    ennemi.setHP(ennemi.getHP() - Newdamage);
                 }
             }
             if(ennemi.getHP() <=0){
