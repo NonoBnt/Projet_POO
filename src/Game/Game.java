@@ -194,26 +194,77 @@ public class Game{
         Exits EXT22 = new Exits("salle_8", false, S8);
         S10.addExits(S10, EXT22);
 
-        Exits EXT23 = new Exits("salle_12", false, S12);
+        Exits EXT23 = new Exits("salle_9", false, S9);
         S11.addExits(S11, EXT23);
 
-        Exits EXT24 = new Exits("salle_1", false, S1);
-        S12.addExits(S12, EXT24);
+        Exits EXT24 = new Exits("salle_12", false, S12);
+        S11.addExits(S11, EXT24);
 
-        Exits EXT25 = new Exits("salle_4", false, S4);
-        S13.addExits(S13, EXT25);
+        Exits EXT25 = new Exits("salle_1", false, S1);
+        S12.addExits(S12, EXT25);
 
-        Exits EXT26 = new Exits("salle_14", false, S14);
-        S13.addExits(S13, EXT26);
+        Exits EXT26 = new Exits("salle_11", false, S11);
+        S12.addExits(S12, EXT26);
 
-        Exits EXT27 = new Exits("salle_8", false, S8);
-        S14.addExits(S14, EXT27);
+        Exits EXT27 = new Exits("salle_4", false, S4);
+        S13.addExits(S13, EXT27);
 
-        Exits EXT28 = new Exits("salle_8", false, S8);
-        S14.addExits(S14, EXT28);
+        Exits EXT28 = new Exits("salle_14", false, S14);
+        S13.addExits(S13, EXT28);
 
-        Exits EXT29 = new Exits("salle_8", false, S8);
+        Exits EXT29 = new Exits("salle_13", false, S13);
         S14.addExits(S14, EXT29);
+
+        Exits EXT30 = new Exits("salle_15", false, S15);
+        S14.addExits(S14, EXT30);
+
+        Exits EXT31 = new Exits("salle_16", false, S16);
+        S14.addExits(S14, EXT31);
+
+        Exits EXT32 = new Exits("salle_17", false, S17);
+        S15.addExits(S15, EXT32);
+
+        Exits EXT33 = new Exits("salle_14", false, S14);
+        S16.addExits(S16, EXT33);
+
+        Exits EXT34 = new Exits("salle_17", false, S17);
+        S16.addExits(S16, EXT34);
+
+        Exits EXT35 = new Exits("salle_5", false, S5);
+        S16.addExits(S16, EXT35);
+
+        Exits EXT36 = new Exits("salle_16", false, S16);
+        S17.addExits(S17, EXT36);
+
+        Exits EXT37 = new Exits("salle_18", false, S18);
+        S17.addExits(S17, EXT37);
+
+        Exits EXT38 = new Exits("salle_17", false, S17);
+        S18.addExits(S18, EXT38);
+
+        Exits EXT39 = new Exits("salle_19", false, S19);
+        S18.addExits(S18, EXT39);
+
+        Exits EXT40 = new Exits("salle_18", false, S18);
+        S19.addExits(S19, EXT40);
+
+        Exits EXT41 = new Exits("salle_5", false, S5);
+        S20.addExits(S20, EXT41);
+
+        Exits EXT42 = new Exits("salle_22", true, S22);
+        S20.addExits(S20, EXT42);
+
+        Exits EXT43 = new Exits("salle_5", false, S5);
+        S21.addExits(S21, EXT43);
+
+        Exits EXT44 = new Exits("salle_20", false, S20);
+        S22.addExits(S22, EXT44);
+
+        Exits EXT45 = new Exits("salle_23", false, S23);
+        S22.addExits(S22, EXT45);
+
+        Exits EXT46 = new Exits("salle_22", false, S22);
+        S23.addExits(S23, EXT46);
 
         
     }
