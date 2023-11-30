@@ -7,10 +7,12 @@ public class Inventory {
     private int length;
     private static final int MAX_WEIGHT = 100;
     private static final int MAX_LENGTH = 15;
+    private final int max_weight;
 
     public Inventory(){
         this.length = 0;
         this.items = new ArrayList<>();
+        this.max_weight = MAX_WEIGHT;
     }
     
     public boolean isFull(){
@@ -39,7 +41,7 @@ public class Inventory {
         return this.length;
     }
     public int getWeightLeft(){
-        return this.MAX_WEIGHT - getTotalWeight();
+        return this.max_weight - getTotalWeight();
     }
     public boolean isKey(){
         boolean flag = false;

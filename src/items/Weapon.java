@@ -46,4 +46,10 @@ public class Weapon extends Items {
     public int getDamage(){
         return this.damage;
     }
+    
+    @Override
+    public String toString(){
+        String s = this.name;
+        return s;
+    }
 }

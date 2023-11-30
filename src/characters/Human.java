@@ -49,7 +49,7 @@ public class Human extends PNJ{
         this.HP = i;
     }
 
-    public void attack(Characters ennemi){
+    public void attack(Characters ennemi, int damageRed){
         if(this.weapon == null){
             if(ennemi.getShield() == null){
                 int Newdamage = (this.damage);
@@ -57,7 +57,7 @@ public class Human extends PNJ{
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
-                int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
+                int Newdamage = (this.damage - damageRed);
                 System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 ennemi.getShield().loseDurability();
                 if(ennemi.getShield().isBroke()){
@@ -79,7 +79,7 @@ public class Human extends PNJ{
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
-                int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
+                int Newdamage = ((this.weapon.getDamage() + this.damage) - damageRed);
                 System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
@@ -116,7 +116,7 @@ public class Human extends PNJ{
                     this.hasSpoke = true;
                     break;
                 case 3:
-                    System.out.println("I got this key for you ! Do you want it ?");
+                    System.out.println("I got this key for you ! Do you want it ? You will maybe need it later.");
                     this.backpack.addItems(new Exitkey());
                     this.hasSpoke = true;
                     break;
@@ -154,19 +154,19 @@ public class Human extends PNJ{
         }
 	}
     @Override
-    public void printChar(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
-    }
-    @Override
     public String toString(){
         int realDamage;
+        String s;
         if(this.weapon == null){
             realDamage = this.damage;
         } else {
             realDamage = (this.damage + this.weapon.getDamage());
         }
-        String s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.";
+        if(this.HP <= 0){
+            s = "DEAD " + realDamage + " damage.";
+        }else{
+            s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        }
         return s;
     }
 }

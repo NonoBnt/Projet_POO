@@ -16,6 +16,5 @@ public abstract class PNJ extends Characters{
 
     public abstract void setHP(int i);
 
-    public abstract void printChar();
 }
 

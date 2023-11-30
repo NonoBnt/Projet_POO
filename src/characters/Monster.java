@@ -4,7 +4,7 @@ import items.*;
 import locations.*;
 import Actions.*;
 
-public class Monster extends PNJ implements Attack{
+public class Monster extends PNJ{
     private static final int MIN_HP = 5;
     private static final int MAX_HP = 35;
     private static final int MIN_DAMAGE = 5;
@@ -30,7 +30,7 @@ public class Monster extends PNJ implements Attack{
         this.HP = i;
     }
 
-    public void attack(Characters ennemi){
+    public void attack(Characters ennemi, int damageRed){
         if(this.weapon == null){
             if(ennemi.getShield() == null){
                 int Newdamage = (this.damage);
@@ -38,7 +38,7 @@ public class Monster extends PNJ implements Attack{
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
-                int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
+                int Newdamage = (this.damage - damageRed);
                 System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 ennemi.getShield().loseDurability();
                 if(ennemi.getShield().isBroke()){
@@ -60,7 +60,7 @@ public class Monster extends PNJ implements Attack{
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
-                int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
+                int Newdamage = ((this.weapon.getDamage() + this.damage) - damageRed);
                 System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
@@ -79,21 +79,22 @@ public class Monster extends PNJ implements Attack{
         }
     }
     @Override
-    public void printChar(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
-    }
-    @Override
     public String toString(){
         int realDamage;
+        String s;
         if(this.weapon == null){
             realDamage = this.damage;
         } else {
             realDamage = (this.damage + this.weapon.getDamage());
         }
-        String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        if(this.HP <= 0){
+            s = "DEAD " + realDamage + " damage.";
+        }else{
+            s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        }
         return s;
     }
+    /*
     @Override
     public void attack(String ennemy) {
         Characters hero = pos.getHero();
@@ -101,8 +102,8 @@ public class Monster extends PNJ implements Attack{
             System.out.println("This target is not in this room");
         }
         else{
-            attack(hero);
+            attack(hero, int damageRed);
         } 
-    }
+    }*/
 }
 

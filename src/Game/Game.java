@@ -1,7 +1,6 @@
 package Game;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import locations.*;
@@ -19,7 +18,7 @@ public class Game{
     public Game(){
         this.loc = new ArrayList<>(23);
         this.createMap();
-        this.hero = new Hero(this.loc.get(0), new Weapon());
+        this.hero = new Hero(this.loc.get(0), new Weapon("Rusty_sword", 15, 1, 5), new Armor("Ancient_shield", 15, 1, 1));
         this.hero.getHeroLoc().addChar(this.hero);
         this.hero.getInv().addItems(new HealPotion());
         this.stop = false;
@@ -120,7 +119,7 @@ public class Game{
         this.loc.add(17,S18);
         
         Locations S19 = new Locations("Room_19");
-        Boss B1 = new Boss(S19);
+        Boss B1 = new Boss();
         S19.addChar(B1);;
         this.loc.add(18,S19);
 
@@ -141,7 +140,7 @@ public class Game{
         this.loc.add(21,S22);
 
         Locations S23 = new Locations("Room_23");
-        Boss B2 = new Boss(S23);
+        Boss B2 = new Boss();
         S23.addChar(B2);
         this.loc.add(22,S23);
 
@@ -228,12 +227,10 @@ public class Game{
 
         Exits EXT21 = new Exits(false, S21);
         S5.addExits(S21, EXT21);
-
-        Exits EXT22 = new Exits(false, S22);
+        
+        Exits EXT22 = new Exits(true, S22);
+        S20.addExits(S22, EXT22);
         S23.addExits(S22, EXT22);
-
-        Exits EXT22_key = new Exits(true, S22);
-        S20.addExits(S22, EXT22_key);
 
         Exits EXT23 = new Exits(false, S23);
         S22.addExits(S23, EXT23);
@@ -256,7 +253,7 @@ public class Game{
         System.out.println(("--- Welcome to The A-MAZE-ing Donjon game ! ---"));
         System.out.println("-----------------------------------------------");
         System.out.println("You are a knight and a Monster has destroyed your village.");
-        System.out.println("So you decide to kill the Monster, you take your rusty sword and your ancient shield, the village elder gave you ");
+        System.out.println("So you decide to kill the Monster, you take your rusty sword and your ancient shield, the village elder gave you his fabulous healing potion.");
         System.out.println("You go to his lair which is in the Mountain next to the village");
         System.out.println("When you reach it, you see the dark entry of a Cave. This Cave seems really deep and dangerous.");
         System.out.println("You decide to enter to kill the Monster, but maybe there was some special Monster so you need to be carefull!");
@@ -346,15 +343,22 @@ public class Game{
                             this.hero.getInv().addItems(lochero.getChestInLoc(lochero).getItem());
                             System.out.println("you took the Chest item");
                         }
+                        else{
+                            System.out.println("The Chest is empty !");
+                        }
                     }
                     else{
                         if(lochero.isHumanInLoc() == true){
-                            if (lochero.getHumanInLoc(lochero).getInv() != null){
+                            if (lochero.getHumanInLoc(lochero).getInv().getItems().size() > 0){
                                 this.hero.getInv().addItems(lochero.getHumanInLoc(lochero).getInv().getItems().get(0));
                                 System.out.println("you took the item from the human");
                             }
-                        }
-                        System.out.println("there is no item to take");
+                            else{
+                                System.out.println("this human has no items to give you for the moment.");
+                            }
+                        }else{
+                            System.out.println("there is no item to take");
+                        } 
                     }
                     break;
                 case "USE":
@@ -362,7 +366,7 @@ public class Game{
                         if ((arg.length) == 2){
                             if(arg[1].equals("Apple")||arg[1].equals("Heal_Potion")){
                             this.hero.use(arg[1]);
-                            System.out.println("You use your" + arg[1]);
+                            System.out.println("You use your " + arg[1]);
                             }
                             else{
                                 if(this.hero.getInv().getFirstInstanceItems(arg[1]) instanceof Weapon || this.hero.getInv().getFirstInstanceItems(arg[1]) instanceof Armor){
@@ -390,16 +394,23 @@ public class Game{
                     break;
                 case "ATTACK":
                     if (lochero.getCharacters().size()==2){
+                        int shielddamreduction;
+                        if(this.hero.getShield() == null){
+                            shielddamreduction = 0;
+                        }else {
+                            shielddamreduction = hero.getShield().getDamageReduction();
+                        }
+
                         this.hero.attack(this.hero.getHeroLoc().getCharacters().get(1).getName());
                         
                         if(lochero.isBossInLoc() && lochero.getBossInLoc(lochero).getHP() > 0 ){
-                            lochero.getBossInLoc(lochero).attack(this.hero);
+                            lochero.getBossInLoc(lochero).attack(this.hero, shielddamreduction);
                         }
                         if(lochero.isHumanInLoc() && lochero.getHumanInLoc(lochero).getHP() > 0){
-                            lochero.getHumanInLoc(lochero).attack(this.hero);
+                            lochero.getHumanInLoc(lochero).attack(this.hero, shielddamreduction);
                         }
                         if(lochero.isMonsterInLoc() &&  lochero.getMonsterInLoc(lochero).getHP() > 0){
-                            lochero.getMonsterInLoc(lochero).attack(this.hero);
+                            lochero.getMonsterInLoc(lochero).attack(this.hero, shielddamreduction);
                         }
 
                     }else{

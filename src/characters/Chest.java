@@ -6,10 +6,7 @@ import locations.*;
 public class Chest extends PNJ {
     private int HP = 2000;
     private final String name = "Chest";
-    private final int damage = 0;
     private Locations pos;
-    private final Weapon weapon = null;
-    private final Armor shield = null;
     private Items chestitItems;
 
     public Chest (Locations loc,  Items items){
@@ -39,19 +36,13 @@ public class Chest extends PNJ {
 		System.out.println("Cling Cling(Traduction : this item is yours only if you want!)");
 	}
     @Override
-    public void printChar(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
-    }
-    @Override
     public String toString(){
-        int realDamage;
-        if(this.weapon == null){
-            realDamage = this.damage;
-        } else {
-            realDamage = (this.damage + this.weapon.getDamage());
+        String s;
+        if(this.HP <= 0){
+            s = "DEAD ";
+        }else{
+            s = this.name + " : " + this.HP + " HP ";
         }
-        String s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.";
         return s;
     }
 }

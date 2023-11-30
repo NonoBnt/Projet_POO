@@ -47,4 +47,9 @@ public class Armor extends Items {
     public int getDamageReduction(){
         return this.damageReduction;
     }
+    @Override
+    public String toString(){
+        String s = this.name;
+        return s;
+    }
 }

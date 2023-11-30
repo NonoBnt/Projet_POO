@@ -1,7 +1,6 @@
 package characters;
 
 import items.*;
-import locations.*;
 
 public class Boss extends Characters{
     private static final int MIN_HP = 75;
@@ -11,26 +10,25 @@ public class Boss extends Characters{
     private int HP;
     private final String name = "Boss";
     private int damage;
-    private Locations pos;
     private Weapon weapon;
     private Armor shield;
 
 
-    public Boss(Locations loc){
+    public Boss(){
         this.HP = (MIN_HP + (int)(Math.random() * ((MAX_HP - MIN_HP )+1)));
         this.damage = ( MIN_DAMAGE + (int)(Math.random() * ((MAX_DAMAGE - MIN_DAMAGE )+1)));
-        this.pos = loc;
     }
     @Override
     public int getHP() {
         return this.HP;
     }
+    
     @Override
     public void setHP(int i) {
         this.HP = i;
     }
 
-    public void attack(Characters ennemi){
+    public void attack(Characters ennemi, int damageRed){
         if(this.weapon == null){
             if(ennemi.getShield() == null){
                 int Newdamage = (this.damage);
@@ -38,7 +36,7 @@ public class Boss extends Characters{
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
-                int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
+                int Newdamage = (this.damage - damageRed);
                 System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 ennemi.getShield().loseDurability();
                 if(ennemi.getShield().isBroke()){
@@ -46,6 +44,7 @@ public class Boss extends Characters{
                     System.out.println("Be careful he broke your shield.");
                 }
                 ennemi.setHP(ennemi.getHP() - Newdamage);
+                
             }
         }
         else {
@@ -60,7 +59,7 @@ public class Boss extends Characters{
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
-                int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
+                int Newdamage = ((this.weapon.getDamage() + this.damage) - damageRed);
                 System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
@@ -79,14 +78,19 @@ public class Boss extends Characters{
         }
     }
     @Override
-    public void printChar(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
-    }
-    @Override
     public String toString(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        int realDamage;
+        String s;
+        if(this.weapon == null){
+            realDamage = this.damage;
+        } else {
+            realDamage = (this.damage + this.weapon.getDamage());
+        }
+        if(this.HP <= 0){
+            s = "DEAD " + realDamage + " damage.";
+        }else{
+            s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        }
         return s;
     }
 }     

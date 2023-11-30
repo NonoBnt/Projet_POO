@@ -16,8 +16,6 @@ public abstract class Characters {
 
     public abstract void setHP(int i);
 
-    public abstract void printChar();
-
     public Armor getShield() {
         return this.shield;
     }
@@ -28,10 +26,6 @@ public abstract class Characters {
     public int getDamage() {
         return this.damage;
     }
-
-    /*public int getFullDamage(){
-        return this.damage + this.weapon.getDamage();
-    }*/
     
     public String getName(){
         return this.name;

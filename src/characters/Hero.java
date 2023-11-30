@@ -26,11 +26,11 @@ public class Hero extends Characters implements Attack, Use, Talk{
         this.backpack = new Inventory();
         this.pos = loc;
     }
-    public Hero(Locations loc){
+    public Hero(Locations loc, Weapon w, Armor s){
         this.HP = (MIN_HP + (int)(Math.random() * (( MAX_HP- MIN_HP )+1)));
         this.HP = 100;
-        this.weapon = null;
-        this.shield = null;
+        this.weapon = w;
+        this.shield = s;
         this.backpack = new Inventory();
         this.pos = loc;
     }
@@ -102,7 +102,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
                     }
                     if(ennemi.getShield().isBroke()){
                         ennemi.setShieldNull();
-                        System.out.println("Yeah he broke his shiel!");
+                        System.out.println("Yeah he broke his shield!");
                     }
                     ennemi.setHP(ennemi.getHP() - Newdamage);
                 }
@@ -110,6 +110,14 @@ public class Hero extends Characters implements Attack, Use, Talk{
             if(ennemi.getHP() <=0){
                 System.out.println("You beat the " + ennemi.getClass().getSimpleName() + "!");
                 pos.setState();
+            } else if((ennemi instanceof Chest)==false){
+                if(this.shield != null){
+                    this.shield.loseDurability();
+                    if(this.shield.isBroke()){
+                        this.shield = null;
+                        System.out.println("Your shield broke !");
+                    }
+                } 
             }
         }
     }
@@ -203,19 +211,27 @@ public class Hero extends Characters implements Attack, Use, Talk{
        }
     }
     @Override
-    public void printChar(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        System.out.println(this.name + " : " + this.HP + " HP " + realDamage + " damage.");
-    }
-    @Override
     public String toString(){
         int realDamage;
-        if(this.weapon == null){
+        String s;
+        if(this.weapon == null && this.shield == null){
             realDamage = this.damage;
-        } else {
-            realDamage = (this.damage + this.weapon.getDamage());
+            s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.\nYou have no sword.\nYou have no shield.";
+        } else{ 
+            if(this.weapon == null){
+            realDamage = this.damage;
+            s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.\nYou have no sword.\nYour Shield : "+ this.shield + ", with " + this.shield.getDurability()+" durability";
+            }else{
+                if(this.shield == null){
+                    realDamage = (this.damage + this.weapon.getDamage());
+                    s = this.name + " : " + this.HP + " HP, " + realDamage + " damage." + "\nYour Sword : " + this.weapon +", with "+ this.weapon.getDurability()+" durability\nYou have no shield.";
+                }else{
+                    realDamage = (this.damage + this.weapon.getDamage());
+                    s = this.name + " : " + this.HP + " HP, " + realDamage + " damage." + "\nYour Sword : " + this.weapon +", with "+ this.weapon.getDurability()+" durability"+"\nYour Shield : "+ this.shield + ", with " + this.shield.getDurability()+" durability";
+                }
+            }
+
         }
-        String s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.";
         return s;
     }
 }
