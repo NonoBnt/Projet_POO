@@ -7,7 +7,7 @@ public class Inventory {
     private int length;
     private static final int MAX_WEIGHT = 100;
     private static final int MAX_LENGTH = 15;
-    private final int max_weight;
+    private int max_weight;
 
     public Inventory(){
         this.length = 0;
@@ -29,14 +29,11 @@ public class Inventory {
         return res;
     }
     public boolean isTooMuchWeight(){
-        return getTotalWeight() >= MAX_WEIGHT;
+        return getTotalWeight() > MAX_WEIGHT;
     }
     public boolean isTooMuchWeight(Items i){
         return (getTotalWeight() + i.getWeight()) >= MAX_WEIGHT;
     }
-    /*public void clearInv(){
-        this.items = new ArrayList<>();
-    }*/
     public int getSpace(){
         return this.length;
     }
@@ -111,7 +108,6 @@ public class Inventory {
     }
         
     
-    //possible problème si plusieurs fois le même item dans l'inventaire
     public void delItems(Items i){
         if (this.items.remove(i) == false){
             System.out.println("There is not an item like this in your backpack");
@@ -126,18 +122,9 @@ public class Inventory {
     public void delFirstInstanceOfItem(String name){
         delItems(getFirstInstanceItems(name));
     }
-    // Idée : faire le test dans avant d'appeler la fonction pour ne pas faire disparaitre l'item a récuperer
     public void addItems(Items i){
-        if (isFull()){
-            System.out.println("There is no more space in your backpack");
-        }
-        else if(isTooMuchWeight(i)){
-            System.out.println("you're not strong enough to lift your backpack");
-        }
-        else{
-            this.items.add(i);
-            length += 1;
-        }
+        this.items.add(i);
+        length += 1;
     }
     public ArrayList<Items> getItems(){
         return this.items;

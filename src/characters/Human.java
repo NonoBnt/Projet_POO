@@ -17,7 +17,7 @@ public class Human extends PNJ{
     private final int damage;
     private Locations pos;
     private Weapon weapon;
-    private Boolean hasSpoke;
+    private boolean hasSpoke;
     private Inventory backpack;
     
 

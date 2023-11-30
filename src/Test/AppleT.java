@@ -7,15 +7,6 @@ import items.Apple;
 import static org.junit.Assert.*;
 
 public class AppleT{
-
-    @Test
-    public void testObjectApple(){
-        Apple apple1 = new Apple();
-        assertEquals(apple1.getName(), "Apple");
-        assertEquals(apple1.getHeal(), 10);
-        assertEquals(apple1.getWeight(), 5);
-    }
-
     @Test
     public void testGetHeal(){
         Apple apple1 = new Apple();

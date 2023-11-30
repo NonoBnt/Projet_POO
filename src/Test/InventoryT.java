@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 
 public class InventoryT{
     @Test
-    public void testGetSpaceLeft(){
+    public void testGetSpaceLeft1(){
         Inventory inv1 = new Inventory();
-        assertEquals(inv1.getSpaceLeft(),(inv1.MAX_LENGTH - inv1.length));
+        inv1.addItems(new Weapon("test", 5, 1, 0));
+        assertEquals(inv1.getSpaceLeft(),14);
+    }
+    @Test
+    public void testGetSpaceLeft2(){
+        Inventory inv1 = new Inventory();
+        assertEquals(inv1.getSpaceLeft(),15);
     }
     @Test
     public void testGetTotalWeigth1(){
@@ -30,7 +36,7 @@ public class InventoryT{
     }
     public void testIsTooMuchWeight2(){
         Inventory inv1 = new Inventory();
-        inv1.addItems(new Weapon("test", 10000, 1, 0));
+        inv1.addItems(new Weapon("test", 1000, 1, 0));
         assertTrue(inv1.isTooMuchWeight());
     }
     public void testIsTooMuchWeight3(){
@@ -46,8 +52,40 @@ public class InventoryT{
     @Test
     public void testIsFull2(){
         Inventory inv1 = new Inventory();
-        
-        assertFalse(inv1.isFull());
+        for(int i = 0 ; i < 16 ; i++){
+            inv1.addItems(new Weapon("test", 5, 1, 0));
+        }
+        assertTrue(inv1.isFull());
+    }
+    @Test
+    public void testGetSpace1(){
+        Inventory inv1 = new Inventory();
+        assertEquals(inv1.getSpace(),0);
+    }
+    @Test
+    public void testGetSpace2(){
+        Inventory inv1 = new Inventory();
+        inv1.addItems(new Weapon("test", 5, 1, 0));
+        assertEquals(inv1.getSpace(),1);
+    }
+    @Test
+    public void testgetWeightLeft1(){
+        Inventory inv1 = new Inventory();
+        assertEquals(inv1.getWeightLeft(),100);
+    }
+    public void testgetWeightLeft2(){
+        Inventory inv1 = new Inventory();
+        inv1.addItems(new Weapon("test", 5, 1, 0));
+        assertEquals(inv1.getWeightLeft(),95);
+    }
+    public void testIsKey1(){
+        Inventory inv1 = new Inventory();
+        assertFalse(inv1.isKey());
+    }
+    public void testIsKey2(){
+        Inventory inv1 = new Inventory();
+        inv1.addItems(new Exitkey());
+        assertTrue(inv1.isKey());
     }
 
 

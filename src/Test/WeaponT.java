@@ -28,16 +28,16 @@ public class WeaponT{
     @Test
     public void testGetDamage(){
         Weapon weapon1 = new Weapon("test", 20, 20, 20);
-        assertEquals(weapon1.getDamage(),weapon1.damage);
+        assertEquals(weapon1.getDamage(),20);
     }
     @Test
     public void testGetName(){
         Weapon weapon1 = new Weapon("test", 20, 20, 20);
-        assertEquals(weapon1.getName(),weapon1.name);
+        assertEquals(weapon1.getName(),"test");
     }
     @Test
     public void testGetWeigth(){
         Weapon weapon1 = new Weapon("test", 20, 20, 20);
-        assertEquals(weapon1.getWeight(),weapon1.weight);
+        assertEquals(weapon1.getWeight(),20);
     }
 }

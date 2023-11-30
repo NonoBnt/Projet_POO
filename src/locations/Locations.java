@@ -174,10 +174,49 @@ public class Locations {
         this.state = false;
     }
 
-    public Boolean isClear(Locations loc){
+    public boolean isClear(Locations loc){
         if(loc.state == true){
             return false;
         } else {return true;}
     }
-    
+
+    public void PrintMap(){
+        System.out.println("                    ----------          ----------          ----------          ----------");
+        System.out.println("                    |        |          |        |          |        |          |        |");
+        System.out.println("                    | Room_4 | ======== | Room_13| ======== | Room_14| ======== | Room_15|");
+        System.out.println("                    |        |          |        |          |        |          |        |");
+        System.out.println("                    ----------          ----------          ----------          ----------");
+        System.out.println("                        ||                                      ||                  ||    ");
+        System.out.println("                        ||                                      ||                  ||    ");
+        System.out.println("                        ||                                      ||                  ||    ");
+        System.out.println("                    ----------                              ----------          ----------          ----------          ----------");
+        System.out.println("                    |        |                              |        |          |        |          |        |          |        |");
+        System.out.println("                    | Room_2 |                              | Room_16| ======== | Room_17| ======== | Room_18| ======== | Room_19|");
+        System.out.println("                    |        |                              |        |          |        |          |        |          |        |");
+        System.out.println("                    ----------                              ----------          ----------          ----------          ----------");
+        System.out.println("                        ||                                      ||                        ");
+        System.out.println("                        ||                                      ||                        ");
+        System.out.println("                        ||                                      ||                        ");
+        System.out.println("----------          ----------          ----------          ----------          ----------");
+        System.out.println("|        |          |        |          |        |          |        |          |        |");
+        System.out.println("| Room_12| ======== | Room_1 | ======== | Room_3 | ======== | Room_5 | ======== | Room_21|");
+        System.out.println("|        |          |        |          |        |          |        |          |        |");
+        System.out.println("----------          ----------          ----------          ----------          ----------");
+        System.out.println("    ||                                      ||                  ||                        ");
+        System.out.println("    ||                                      ||                  ||                        ");
+        System.out.println("    ||                                      ||                  ||                        ");
+        System.out.println("----------          ----------          ----------          ----------          ----------");
+        System.out.println("|        |          |        |          |        |          |        |          |        |");
+        System.out.println("| Room_11| ======== | Room_9 |          | Room_6 |          | Room_20| ======== | Room_22|");
+        System.out.println("|        |          |        |          |        |          |        |          |        |");
+        System.out.println("----------          ----------          ----------          ----------          ----------");
+        System.out.println("                        ||                  ||                                      ||    ");
+        System.out.println("                        ||                  ||                                      ||    ");
+        System.out.println("                        ||                  ||                                      ||    ");
+        System.out.println("----------          ----------          ----------                              ----------");
+        System.out.println("|        |          |        |          |        |                              |        |");
+        System.out.println("| Room_10| ======== | Room_8 | ======== | Room_7 |                              | Room_23|");
+        System.out.println("|        |          |        |          |        |                              |        |");
+        System.out.println("----------          ----------          ----------                              ----------");
+    }
 }

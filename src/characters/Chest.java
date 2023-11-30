@@ -7,11 +7,11 @@ public class Chest extends PNJ {
     private int HP = 2000;
     private final String name = "Chest";
     private Locations pos;
-    private Items chestitItems;
+    private Items chestItems;
 
     public Chest (Locations loc,  Items items){
         this.pos = loc;
-        this.chestitItems = items;
+        this.chestItems = items;
     }
     @Override
     public int getHP() {
@@ -27,18 +27,18 @@ public class Chest extends PNJ {
     }
 
     public Items getItem(){
-        if (this.chestitItems == null){
+        if (this.chestItems == null){
             System.out.println("coffre vide");
-            return this.chestitItems;
+            return this.chestItems;
         }
         else{
-            return this.chestitItems;
+            return this.chestItems;
         }
     }
 
     public void delItems(){
-        if(this.chestitItems != null){
-            this.chestitItems = null;
+        if(this.chestItems != null){
+            this.chestItems = null;
             System.out.println("you took the Chest item");
         } else{
             System.out.println("The chest still has the item");

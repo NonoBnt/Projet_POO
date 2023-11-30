@@ -18,7 +18,7 @@ public class Game{
     public Game(){
         this.loc = new ArrayList<>(23);
         this.createMap();
-        this.hero = new Hero(this.loc.get(0), new Weapon("Rusty_sword", 15, 1, 5), new Armor("Ancient_shield", 15, 1, 1));
+        this.hero = new Hero(this.loc.get(0), new Weapon("Rusty_sword", 15, 10, 5), new Armor("Ancient_shield", 15, 5, 1));
         this.hero.getHeroLoc().addChar(this.hero);
         this.hero.getInv().addItems(new HealPotion());
         this.stop = false;
@@ -72,7 +72,6 @@ public class Game{
         Human H2 = new Human("Caïn",S9);
         S9.addChar(H2);
         this.loc.add(8,S9);
-        S1.addChar(H2);
 
         Locations S10 = new Locations("Room_10",false);
         Armor A1 = new Armor("Legendary_Armor", 0, 25, 3);
@@ -243,7 +242,14 @@ public class Game{
 
     public void take(Items i){
         Inventory Inv = this.hero.getInv();
-        Inv.addItems(i);
+        if (this.hero.getInv().isFull()){
+            System.out.println("There is no more space in your backpack");
+        }
+        else if(this.hero.getInv().isTooMuchWeight(i)){
+            System.out.println("you're not strong enough to lift your backpack");
+        }else{
+            Inv.addItems(i);
+        }
     }
     public void quit(){
         this.stop = true;
@@ -313,9 +319,15 @@ public class Game{
                                 this.hero.getInv().printInv();
                             } else if(arg[1].equals("HERO")){
                                 System.out.println(this.hero);
+                            } else if(arg[1].equals("MAP")){
+                                System.out.println("");
+                                System.out.println("");
+                                System.out.println("Map :");
+                                System.out.println("");
+                                lochero.PrintMap();
                             } else {
                                 System.out.println("Unknown second argument");
-                            } 
+                            }
                         }else{
                             System.out.println("Room information :");
                             System.out.println("hero loc : " + this.hero.getHeroLoc().getName());
@@ -342,9 +354,10 @@ public class Game{
                                     System.out.println(lochero.getMonsterInLoc(lochero));
                                 }
                                 System.out.println("");
-                                System.out.println("You can use the command LOOK INVENTORY to check your backpack or LOOK HERO to have all the information on the hero");
+                                System.out.println("You can use the command LOOK INVENTORY to check your backpack, LOOK HERO to have all the information on the hero or LOOK MAP to see the MAP of the game");
                             }
                         }
+                        
                     }
                     else{
                         System.out.println("Too many argument");
@@ -354,8 +367,16 @@ public class Game{
                     if((arg.length) <= 1){
                         if(lochero.isChestInLoc() == true && lochero.getChestInLoc(lochero).getHP() > 0){
                             if (lochero.getChestInLoc(lochero).getItem() != null){
-                                this.hero.getInv().addItems(lochero.getChestInLoc(lochero).getItem());
-                                lochero.getChestInLoc(lochero).delItems();
+                                if (this.hero.getInv().isFull()){
+                                    System.out.println("There is no more space in your backpack you can use DELETE to have more space in it");
+                                }
+                                else if(this.hero.getInv().isTooMuchWeight(lochero.getChestInLoc(lochero).getItem())){
+                                    System.out.println("you're not strong enough to lift your backpack you can use DELETE to have more space in it");
+                                }else{
+                                    this.hero.getInv().addItems(lochero.getChestInLoc(lochero).getItem());
+                                    lochero.getChestInLoc(lochero).delItems();
+                                }
+                                
                             }
                             else{
                                 System.out.println("The Chest is empty !");
@@ -364,8 +385,15 @@ public class Game{
                         else{
                             if(lochero.isHumanInLoc() == true && lochero.getHumanInLoc(lochero).getHP() > 0){
                                 if (lochero.getHumanInLoc(lochero).getInv().getItems().size() > 0){
-                                    this.hero.getInv().addItems(lochero.getHumanInLoc(lochero).getInv().getItems().get(0));
-                                    System.out.println("you took the item from the human");
+                                    if (this.hero.getInv().isFull()){
+                                        System.out.println("There is no more space in your backpack you can use DELETE to have more space in it");
+                                    }
+                                    else if(this.hero.getInv().isTooMuchWeight(lochero.getChestInLoc(lochero).getItem())){
+                                        System.out.println("you're not strong enough to lift your backpack you can use DELETE to have more space in it");
+                                    }else{
+                                        this.hero.getInv().addItems(lochero.getHumanInLoc(lochero).getInv().getItems().get(0));
+                                        System.out.println("you took the item from the human");
+                                    }  
                                 }
                                 else{
                                     System.out.println("this human has no items to give you for the moment.");
