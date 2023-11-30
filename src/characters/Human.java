@@ -1,6 +1,8 @@
 package characters;
 
-import Actions.Talk;
+
+import java.util.Random;
+
 import items.*;
 import locations.*;
 
@@ -25,6 +27,7 @@ public class Human extends PNJ{
         this.damage = ( MIN_DAMAGE + (int)(Math.random() * ((MAX_DAMAGE - MIN_DAMAGE )+1)));
         this.pos = loc;
         this.hasSpoke = false;
+        this.backpack = new Inventory();
     }
 
     public Human(String n, Locations loc, Weapon w){
@@ -34,6 +37,7 @@ public class Human extends PNJ{
         this.pos = loc;
         this.weapon = w;
         this.hasSpoke = false;
+        this.backpack = new Inventory();
     }
     
     @Override
@@ -49,12 +53,12 @@ public class Human extends PNJ{
         if(this.weapon == null){
             if(ennemi.getShield() == null){
                 int Newdamage = (this.damage);
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause" + " "+ Newdamage + " " + "damage to you.");
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
                 int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 ennemi.getShield().loseDurability();
                 if(ennemi.getShield().isBroke()){
                     ennemi.setShieldNull();
@@ -66,7 +70,7 @@ public class Human extends PNJ{
         else {
             if(ennemi.getShield() == null){
                 int Newdamage = (this.weapon.getDamage() + this.damage);
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
                     this.weapon = null;
@@ -76,7 +80,7 @@ public class Human extends PNJ{
             }
             else {
                 int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
                     this.weapon = null;
@@ -102,18 +106,13 @@ public class Human extends PNJ{
 	
 	public void interact() {
         if (this.hasSpoke == false){
-            int rand = (int)Math.random()%10;
+            int max = 9;
+            int min = 1;
+            Random random = new Random();
+            int rand = random.nextInt(max - min) + min;
             switch (rand) {
                 case 0:
                     System.out.println("Take my information: https://en.wikipedia.org/wiki/Text-based_game !");
-                    this.hasSpoke = true;
-                    break;
-                case 1:
-                    System.out.println("The cake is a lie !");
-                    this.hasSpoke = true;
-                    break;
-                case 2:
-                    System.out.println("Hey !");
                     this.hasSpoke = true;
                     break;
                 case 3:
@@ -136,7 +135,8 @@ public class Human extends PNJ{
                     this.hasSpoke = true;
                     break;
                 case 7:
-                    System.out.println("I'm useless.");
+                    System.out.println("I'm useless. Take my sword");
+                    this.backpack.addItems(new Weapon("sword",5,15));
                     this.hasSpoke = true;
                     break;
                 case 8:
@@ -144,7 +144,8 @@ public class Human extends PNJ{
                     this.hasSpoke = true;
                     break;
                 case 9:
-                    System.out.println("Be careful this dungeon is full of monsters !");
+                    System.out.println("Be careful this dungeon is full of monsters ! take my armor");
+                    this.backpack.addItems(new Armor("Shield",10,15));
                     this.hasSpoke = true;
                     break;
             }
@@ -159,8 +160,13 @@ public class Human extends PNJ{
     }
     @Override
     public String toString(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        int realDamage;
+        if(this.weapon == null){
+            realDamage = this.damage;
+        } else {
+            realDamage = (this.damage + this.weapon.getDamage());
+        }
+        String s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.";
         return s;
     }
 }

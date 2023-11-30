@@ -7,8 +7,8 @@ import items.*;
 import locations.*;
 
 public class Hero extends Characters implements Attack, Use, Talk{
-    private static final int MIN_HP = 50;
-    private static final int MAX_HP = 400;
+    private static final int MIN_HP = 100;
+    private static final int MAX_HP = 200;
     private int HP;
     private final String name = "Hero";
     private final int damage = 10;
@@ -20,6 +20,15 @@ public class Hero extends Characters implements Attack, Use, Talk{
 
     public Hero(Locations loc){
         this.HP = (MIN_HP + (int)(Math.random() * (( MAX_HP- MIN_HP )+1)));
+        this.HP = 100;
+        this.weapon = null;
+        this.shield = null;
+        this.backpack = new Inventory();
+        this.pos = loc;
+    }
+    public Hero(Locations loc){
+        this.HP = (MIN_HP + (int)(Math.random() * (( MAX_HP- MIN_HP )+1)));
+        this.HP = 100;
         this.weapon = null;
         this.shield = null;
         this.backpack = new Inventory();
@@ -50,7 +59,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
     }
     public void attack(Characters ennemi){
         if(ennemi.getHP() <= 0){
-            System.out.println("You try to fight against " + ennemi.getClass().getSimpleName() + "but he has no hp.");
+            System.out.println("You try to fight against " + ennemi.getClass().getSimpleName() + " but he has no hp.");
             System.out.println("Your attack has choke.");
         } 
         else {
@@ -58,12 +67,12 @@ public class Hero extends Characters implements Attack, Use, Talk{
             if(this.weapon == null){
                 if(ennemi.getShield() == null){
                     int Newdamage = (this.damage);
-                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    System.out.println("You hit and hurt him. It cause " + Newdamage + " damage to him.");
                     ennemi.setHP(ennemi.getHP() - Newdamage);
                 }
                 else {
                     int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
-                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    System.out.println("You hit and hurt him. It cause " + Newdamage + " damage to him.");
                     ennemi.getShield().loseDurability();
                     if(ennemi.getShield().isBroke()){
                         ennemi.setShieldNull();
@@ -75,7 +84,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
             else {
                 if(ennemi.getShield() == null){
                     int Newdamage = (this.weapon.getDamage() + this.damage);
-                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    System.out.println("You hit and hurt him. It cause " + Newdamage + " damage to him.");
                     weapon.loseDurability();
                     if(this.weapon.isBroke()){
                         this.weapon = null;
@@ -85,7 +94,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
                 }
                 else {
                     int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
-                    System.out.println("You hit and hurt him. It cause" + Newdamage + "damage to him.");
+                    System.out.println("You hit and hurt him. It cause" + " " + Newdamage + " " +"damage to him.");
                     weapon.loseDurability();
                     if(this.weapon.isBroke()){
                         this.weapon = null;
@@ -99,7 +108,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
                 }
             }
             if(ennemi.getHP() <=0){
-                System.out.println("You beat " + ennemi.getClass().getSimpleName() + "!");
+                System.out.println("You beat the " + ennemi.getClass().getSimpleName() + "!");
                 pos.setState();
             }
         }
@@ -153,20 +162,35 @@ public class Hero extends Characters implements Attack, Use, Talk{
 	}
     @Override
     public void use(String item) {
-       if (this.backpack.getFirstInstanceItems(item) instanceof Apple){
-            this.HP += this.backpack.getFirstAppleInItem().getHeal();
-            this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
-       }
-       else{ 
-            if(this.backpack.getFirstInstanceItems(item) instanceof HealPotion){
-                this.HP += this.backpack.getFirstHealPotionInItem().getHeal();
-                this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
-            }
-            else{
-                System.out.println("you can't use that here !");
-            }
-       }
+        if (item.equals("Apple")){
+            if(this.backpack.getFirstAppleInItem()==null){
+                    System.out.println("There's no Apple in your Inventory !");
+                } else {
+                    this.HP += this.backpack.getFirstAppleInItem().getHeal();
+                    this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+                }  
+        }
+        else{ 
+             if(item.equals("Heal_Potion")){
+                if(this.backpack.getFirstHealPotionInItem()==null){
+                    System.out.println("There's no Heal_Potion in your Inventory !");
+                } else {
+                    this.HP += this.backpack.getFirstHealPotionInItem().getHeal();
+                    this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+                }   
+             }
+             else{
+                 System.out.println("you can't use that here !");
+             }
+        }
     }
+    public void setWeapon(Items i){
+        this.weapon = (Weapon)i;
+    }
+    public void setArmor(Items i){
+        this.shield = (Armor)i; 
+    }
+
     @Override
     public void talk() {
        if (this.pos.isHumanInLoc()==true){
@@ -185,8 +209,13 @@ public class Hero extends Characters implements Attack, Use, Talk{
     }
     @Override
     public String toString(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        int realDamage;
+        if(this.weapon == null){
+            realDamage = this.damage;
+        } else {
+            realDamage = (this.damage + this.weapon.getDamage());
+        }
+        String s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.";
         return s;
     }
 }

@@ -19,8 +19,9 @@ public class Game{
     public Game(){
         this.loc = new ArrayList<>(23);
         this.createMap();
-        this.hero = new Hero(this.loc.get(0));
+        this.hero = new Hero(this.loc.get(0), new Weapon());
         this.hero.getHeroLoc().addChar(this.hero);
+        this.hero.getInv().addItems(new HealPotion());
         this.stop = false;
     }
     public Hero getHero(){
@@ -73,7 +74,7 @@ public class Game{
         this.loc.add(8,S9);
 
         Locations S10 = new Locations("Room_10",false);
-        Armor A1 = new Armor("Legendary Armor", 0, 25, 3);
+        Armor A1 = new Armor("Legendary_Armor", 0, 25, 3);
         Chest C1 = new Chest(S10, A1);
         S10.addChar(C1);
         this.loc.add(9,S10);
@@ -89,7 +90,7 @@ public class Game{
         this.loc.add(11,S12);
 
         Locations S13 = new Locations("Room_13",false);
-        Human H4 = new Human("??? AKA BLUE BABBY",S13);
+        Human H4 = new Human("??? AKA BLUE BABY",S13);
         S13.addChar(H4);
         this.loc.add(12,S13);
 
@@ -133,16 +134,16 @@ public class Game{
         S21.addChar(H8);
         this.loc.add(20,S21);
 
-        Locations S22 = new Locations("Room_22");
-        Weapon W1 = new Weapon("Legendary sword", 0, 50, 10);
+        Locations S22 = new Locations("Room_22", false);
+        Weapon W1 = new Weapon("Legendary_sword", 0, 50, 10);
         Chest C2 = new Chest(S22, W1);
         S22.addChar(C2);
         this.loc.add(21,S22);
 
         Locations S23 = new Locations("Room_23");
-        Boss B2 = new Boss(S22);
-        S23.addChar(B2);;
-        this.loc.add(22,S22);
+        Boss B2 = new Boss(S23);
+        S23.addChar(B2);
+        this.loc.add(22,S23);
 
         //partie des exits
         Exits EXT1 = new Exits(false, S1);
@@ -251,6 +252,17 @@ public class Game{
         createMap();
         String[] arg;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("-----------------------------------------------");
+        System.out.println(("--- Welcome to The A-MAZE-ing Donjon game ! ---"));
+        System.out.println("-----------------------------------------------");
+        System.out.println("You are a knight and a Monster has destroyed your village.");
+        System.out.println("So you decide to kill the Monster, you take your rusty sword and your ancient shield, the village elder gave you ");
+        System.out.println("You go to his lair which is in the Mountain next to the village");
+        System.out.println("When you reach it, you see the dark entry of a Cave. This Cave seems really deep and dangerous.");
+        System.out.println("You decide to enter to kill the Monster, but maybe there was some special Monster so you need to be carefull!");
+        System.out.println("");
+        System.out.println("Rules are simple enter a command to make an action, you can use the command HELP to know what to do.");
+        System.out.println("To win you need to kill the boss. GOOD LUCK !! ;)");
         while(this.stop != true){
             Locations lochero = this.hero.getHeroLoc();
             System.out.print("Please enter your command :");
@@ -274,8 +286,8 @@ public class Game{
                     if(lochero.isChestInLoc() == true && lochero.getChestInLoc(lochero).getItem() != null || lochero.isHumanInLoc() == true && lochero.getHumanInLoc(lochero).getInv() != null){
                         System.out.println("- TAKE (You can take the items own by the PNJ in front of you by using this command !)");
                     }
-                    if(this.hero.getInv().getFirstInstanceItems("Apple") != null || this.hero.getInv().getFirstInstanceItems("HealPotion") != null){
-                        System.out.println("- USE (this means you can use one Apple or HealPotion from your inventory)");
+                    if(this.hero.getInv().getFirstInstanceItems("Apple") != null || this.hero.getInv().getFirstInstanceItems("HealPotion") != null || this.hero.getInv().isWeaponInInv() || this.hero.getInv().isShieldInInv()){
+                        System.out.println("- USE (this means you can use one Apple or HealPotion from your inventory or equip an Armor/Sword in your inventory)");
                     }
                     if(lochero.isCharInLoc()){
                         System.out.println("- ATTACK(this function allow you to gave a sword or punch attack to try to kill him but he will respond with an attack too !)");
@@ -288,8 +300,11 @@ public class Game{
                 case "LOOK":
                     if((arg.length) <= 2){
                         if((arg.length) == 2){
-                            if(arg[1] == "INVENTORY"){
+                            if(arg[1].equals("INVENTORY")){
                                 this.hero.getInv().printInv();
+                            }
+                            if(arg[1].equals("HERO")){
+                                System.out.println(this.hero);
                             }    
                         }else{
                             System.out.println("Room information :");
@@ -298,31 +313,27 @@ public class Game{
                             for(String i : exits.keySet()){
                                 System.out.println(" -Exits : " + i );
                             }
-                            System.out.println("");
-                            //System.out.println(this.hero);
                             
-                            System.out.println(" -Character : ");
-                            /*if(lochero.isBossInLoc()){
-                                //lochero.getBossInLoc(lochero).printChar();
-                                int realDamage = (lochero.getBossInLoc(lochero).getFullDamage());
-                                System.out.println(lochero.getBossInLoc(lochero).getName() + " : " + lochero.getBossInLoc(lochero).getHP() + " HP " + realDamage + " damage.");
-                            } 
-                            if(lochero.isChestInLoc()){
-                                //lochero.getChestInLoc(lochero).printChar();
-                                System.out.println(lochero.getChestInLoc(lochero).getName() + " : " + lochero.getChestInLoc(lochero).getHP() + " HP ");
-                            } 
-                            if(lochero.isHumanInLoc()){
-                                //lochero.getHumanInLoc(lochero).printChar();
-                                int realDamage = (lochero.getHumanInLoc(lochero).getFullDamage());
-                                System.out.println(lochero.getHumanInLoc(lochero).getName() + " : " + lochero.getHumanInLoc(lochero).getHP() + " HP " + realDamage + " damage.");
-                            } 
-                                if(lochero.isMonsterInLoc()){
-                                //lochero.getMonsterInLoc(lochero).printChar();
-                                /*int realDamage = (lochero.getMonsterInLoc(lochero).getFullDamage());
-                                System.out.println(lochero.getMonsterInLoc(lochero).getName() + " : " + lochero.getMonsterInLoc(lochero).getHP() + " HP " + realDamage + " damage.");*/
-                            //}
                             System.out.println("");
-                            System.out.println("You can use the argument INVENTORY to check your backpack !");
+                            if(lochero.isCharInLoc()){
+                                System.out.println(" -Character : ");
+                                if(lochero.isBossInLoc()){
+                                    System.out.println(lochero.getBossInLoc(lochero));
+                                }   
+                                if(lochero.isChestInLoc()){
+                                    System.out.println(lochero.getChestInLoc(lochero));
+                                
+                                } 
+                                if(lochero.isHumanInLoc()){
+                                    System.out.println(lochero.getHumanInLoc(lochero));
+                                    
+                                } 
+                                if(lochero.isMonsterInLoc()){
+                                    System.out.println(lochero.getMonsterInLoc(lochero));
+                                }
+                                System.out.println("");
+                                System.out.println("You can use the argument INVENTORY to check your backpack or HERO to have all the information on the hero");
+                            }
                         }
                     }
                     else{
@@ -333,21 +344,48 @@ public class Game{
                     if(lochero.isChestInLoc() == true){
                         if (lochero.getChestInLoc(lochero).getItem() != null){
                             this.hero.getInv().addItems(lochero.getChestInLoc(lochero).getItem());
+                            System.out.println("you took the Chest item");
                         }
                     }
                     else{
                         if(lochero.isHumanInLoc() == true){
                             if (lochero.getHumanInLoc(lochero).getInv() != null){
                                 this.hero.getInv().addItems(lochero.getHumanInLoc(lochero).getInv().getItems().get(0));
+                                System.out.println("you took the item from the human");
                             }
                         }
+                        System.out.println("there is no item to take");
                     }
                     break;
                 case "USE":
-                    if ((arg.length) == 2){
-                        this.hero.use(arg[1]);
-                    }else{
-                        System.out.println("missing argument item to USE");
+                    if((arg.length) <= 2){
+                        if ((arg.length) == 2){
+                            if(arg[1].equals("Apple")||arg[1].equals("Heal_Potion")){
+                            this.hero.use(arg[1]);
+                            System.out.println("You use your" + arg[1]);
+                            }
+                            else{
+                                if(this.hero.getInv().getFirstInstanceItems(arg[1]) instanceof Weapon || this.hero.getInv().getFirstInstanceItems(arg[1]) instanceof Armor){
+                                    Items p = this.hero.getInv().getFirstInstanceItems(arg[1]);
+                                    if(p instanceof Weapon){
+                                        this.hero.setWeapon(p);
+                                        System.out.println("You equip your" + arg[1]);
+                                    }
+                                    if(p instanceof Armor){
+                                        this.hero.setArmor(p);
+                                        System.out.println("You equip your" + arg[1]);
+                                    }
+                                }
+                                else{
+                                    System.out.println("There is no object like this in your inventory");
+                                }
+                            }
+                        }else{
+                            System.out.println("missing argument item to USE");
+                        }
+                    }
+                    else{
+                        System.out.println("Too many argument !");
                     }
                     break;
                 case "ATTACK":
@@ -373,12 +411,18 @@ public class Game{
                     this.hero.talk();
                     break;
                 case "DELETE":
-                    if ((arg.length) == 2){
-                        this.hero.getInv().delFirstInstanceOfItem(arg[1]);
-                    }else{
-                        System.out.println("missing argument item to DELETE");
+                    if((arg.length) <= 2){
+                        if ((arg.length) == 2){
+                            this.hero.getInv().delFirstInstanceOfItem(arg[1]);
+                            System.out.println("You erase " + arg[1] + " from your inventory");
+                        }else{
+                            System.out.println("missing argument item to DELETE");
+                        }
                     }
-                    break;        
+                    else{
+                        System.out.println("Too many argument !");
+                    }
+                    break;           
                 case "QUIT":
                     System.out.println("Arret du jeu");
                     quit();

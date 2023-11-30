@@ -4,10 +4,10 @@ import items.*;
 import locations.*;
 
 public class Boss extends Characters{
-    private static final int MIN_HP = 50;
+    private static final int MIN_HP = 75;
     private static final int MAX_HP = 200;
     private static final int MIN_DAMAGE = 20;
-    private static final int MAX_DAMAGE = 60;
+    private static final int MAX_DAMAGE = 50;
     private int HP;
     private final String name = "Boss";
     private int damage;
@@ -34,12 +34,12 @@ public class Boss extends Characters{
         if(this.weapon == null){
             if(ennemi.getShield() == null){
                 int Newdamage = (this.damage);
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
                 int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 ennemi.getShield().loseDurability();
                 if(ennemi.getShield().isBroke()){
                     ennemi.setShieldNull();
@@ -51,7 +51,7 @@ public class Boss extends Characters{
         else {
             if(ennemi.getShield() == null){
                 int Newdamage = (this.weapon.getDamage() + this.damage);
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause" + " "+ Newdamage + " " + "damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
                     this.weapon = null;
@@ -61,7 +61,7 @@ public class Boss extends Characters{
             }
             else {
                 int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
                     this.weapon = null;
@@ -75,7 +75,7 @@ public class Boss extends Characters{
             }
         }
         if(ennemi.getHP() <=0){
-            System.out.println(ennemi.getClass().getSimpleName() + " beat you!\n");
+            System.out.println(this.getClass().getSimpleName() + " beat you!\n");
         }
     }
     @Override

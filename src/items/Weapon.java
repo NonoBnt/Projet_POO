@@ -1,16 +1,24 @@
 package items;
 
 public class Weapon extends Items {
+    private static final int MIN_DAMAGE = 1;
+    private static final int MAX_DAMAGE = 5;
     private final String name;
     private final int weight;
     private int durability;
-    private final int damage;
+    private int damage;
 
     public Weapon(String n, int w, int d, int dam){
         this.name = n;
         this.weight = w;
         this.durability = d;
         this.damage = dam;
+    }
+    public Weapon(String n, int w, int d){
+        this.name = n;
+        this.weight = w;
+        this.durability = d;
+        this.damage =  MIN_DAMAGE + (int)(Math.random() * ((MAX_DAMAGE - MIN_DAMAGE )+1));
     }
 
     public boolean isBroke(){

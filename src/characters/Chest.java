@@ -45,8 +45,13 @@ public class Chest extends PNJ {
     }
     @Override
     public String toString(){
-        int realDamage = (this.damage + this.weapon.getDamage());
-        String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
+        int realDamage;
+        if(this.weapon == null){
+            realDamage = this.damage;
+        } else {
+            realDamage = (this.damage + this.weapon.getDamage());
+        }
+        String s = this.name + " : " + this.HP + " HP, " + realDamage + " damage.";
         return s;
     }
 }

@@ -1,7 +1,7 @@
 package items;
 
 public class HealPotion extends Consumable{
-    private final static String NAME = "Heal Potion";
+    private final static String NAME = "Heal_Potion";
     private final static int WEIGHT = 10;
     private int weight;
     private String name;

@@ -6,9 +6,9 @@ import Actions.*;
 
 public class Monster extends PNJ implements Attack{
     private static final int MIN_HP = 5;
-    private static final int MAX_HP = 25;
+    private static final int MAX_HP = 35;
     private static final int MIN_DAMAGE = 5;
-    private static final int MAX_DAMAGE = 25;
+    private static final int MAX_DAMAGE = 15;
     private int HP;
     private final String name = "Monster";
     private final int damage;
@@ -34,12 +34,12 @@ public class Monster extends PNJ implements Attack{
         if(this.weapon == null){
             if(ennemi.getShield() == null){
                 int Newdamage = (this.damage);
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause" + " "+ Newdamage + " " + "damage to you.");
                 ennemi.setHP(ennemi.getHP() - Newdamage);
             }
             else {
                 int Newdamage = (this.damage - ennemi.getShield().getDamageReduction());
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 ennemi.getShield().loseDurability();
                 if(ennemi.getShield().isBroke()){
                     ennemi.setShieldNull();
@@ -51,7 +51,7 @@ public class Monster extends PNJ implements Attack{
         else {
             if(ennemi.getShield() == null){
                 int Newdamage = (this.weapon.getDamage() + this.damage);
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
                     this.weapon = null;
@@ -61,7 +61,7 @@ public class Monster extends PNJ implements Attack{
             }
             else {
                 int Newdamage = ((this.weapon.getDamage() + this.damage) - ennemi.getShield().getDamageReduction());
-                System.out.println("hit you and cause" + Newdamage + "damage to you.");
+                System.out.println("hit you and cause " + Newdamage + " damage to you.");
                 weapon.loseDurability();
                 if(this.weapon.isBroke()){
                     this.weapon = null;
@@ -75,7 +75,7 @@ public class Monster extends PNJ implements Attack{
             }
         }
         if(ennemi.getHP() <=0){
-            System.out.println(ennemi.getClass().getSimpleName() + " beat you!\n");
+            System.out.println(this.getClass().getSimpleName() + " beat you!\n");
         }
     }
     @Override
@@ -85,7 +85,12 @@ public class Monster extends PNJ implements Attack{
     }
     @Override
     public String toString(){
-        int realDamage = (this.damage + this.weapon.getDamage());
+        int realDamage;
+        if(this.weapon == null){
+            realDamage = this.damage;
+        } else {
+            realDamage = (this.damage + this.weapon.getDamage());
+        }
         String s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
         return s;
     }

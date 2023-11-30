@@ -38,6 +38,9 @@ public class Inventory {
     public int getSpace(){
         return this.length;
     }
+    public int getWeightLeft(){
+        return this.MAX_WEIGHT - getTotalWeight();
+    }
     public boolean isKey(){
         boolean flag = false;
         for (int i = 0; i < this.length;i++){
@@ -70,7 +73,7 @@ public class Inventory {
     public Items getFirstInstanceItems(String name){
         Items ret = null;
         for (int i = 0; i < this.length;i++){
-            if (this.items.get(i).getName() == name && ret == null){
+            if (this.items.get(i).getName().equals(name) && ret == null){
                 ret = this.items.get(i);      
             }
         }return ret;
@@ -86,11 +89,29 @@ public class Inventory {
         }
 
     }
+
+    public boolean isWeaponInInv(){
+        boolean ret = false;
+        for (int i = 0; i < this.length;i++){
+            if (this.items.get(i) instanceof Weapon){
+                ret = true;      
+            }
+        }return ret;
+    }
+
+    public boolean isShieldInInv(){
+        boolean ret = false;
+        for (int i = 0; i < this.length;i++){
+            if (this.items.get(i) instanceof Armor){
+                ret = true;      
+            }
+        }return ret;
+    }
         
     
     //possible problème si plusieurs fois le même item dans l'inventaire
     public void delItems(Items i){
-        if (!this.items.remove(i)){
+        if (this.items.remove(i) == false){
             System.out.println("There is not an item like this in your backpack");
         }else{
             this.items.remove(i);
@@ -124,6 +145,6 @@ public class Inventory {
             System.out.println(this.items.get(i).getName());
         }
         System.out.println("There is still " + getSpaceLeft() + " places in your backpack.");
-        System.out.println("You can carry " + getTotalWeight() + "more pounds");
+        System.out.println("You can carry " + getWeightLeft() + " more pounds");
     }
 }
