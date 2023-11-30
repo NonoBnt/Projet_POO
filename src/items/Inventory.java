@@ -118,6 +118,7 @@ public class Inventory {
         }else{
             this.items.remove(i);
             length -= 1;
+            System.out.println("You erase " + i.getName() + " from your inventory");
         }
 
     }

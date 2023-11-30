@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class InventoryT(){
+public class InventoryT{
     @Test
     public void testGetSpaceLeft(){
         Inventory inv1 = new Inventory();

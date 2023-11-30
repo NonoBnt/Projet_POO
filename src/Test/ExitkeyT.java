@@ -4,7 +4,7 @@ import items.Exitkey;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ExitkeyT(){
+public class ExitkeyT{
 
     @Test
     public void testObjectExitkey(){

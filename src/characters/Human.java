@@ -48,6 +48,10 @@ public class Human extends PNJ{
     public void setHP(int i) {
         this.HP = i;
     }
+    @Override
+    public Armor getShield(){
+        return null;
+    }
 
     public void attack(Characters ennemi, int damageRed){
         if(this.weapon == null){
@@ -163,7 +167,7 @@ public class Human extends PNJ{
             realDamage = (this.damage + this.weapon.getDamage());
         }
         if(this.HP <= 0){
-            s = "DEAD " + realDamage + " damage.";
+            s = "DEAD";
         }else{
             s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
         }

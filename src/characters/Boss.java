@@ -27,6 +27,10 @@ public class Boss extends Characters{
     public void setHP(int i) {
         this.HP = i;
     }
+    @Override
+    public Armor getShield(){
+        return this.shield;
+    }
 
     public void attack(Characters ennemi, int damageRed){
         if(this.weapon == null){
@@ -87,7 +91,7 @@ public class Boss extends Characters{
             realDamage = (this.damage + this.weapon.getDamage());
         }
         if(this.HP <= 0){
-            s = "DEAD " + realDamage + " damage.";
+            s = "DEAD";
         }else{
             s = this.name + " : " + this.HP + " HP " + realDamage + " damage.";
         }

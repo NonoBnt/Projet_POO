@@ -16,9 +16,8 @@ public abstract class Characters {
 
     public abstract void setHP(int i);
 
-    public Armor getShield() {
-        return this.shield;
-    }
+    public abstract Armor getShield();
+    
     public void setShieldNull(){
         this.shield = null; 
     }

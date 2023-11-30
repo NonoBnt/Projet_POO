@@ -53,7 +53,12 @@ public class Hero extends Characters implements Attack, Use, Talk{
     public Locations getHeroLoc(){
         return this.pos;
     }
-    
+
+    @Override
+    public Armor getShield(){
+        return this.shield;
+    }
+
     public Inventory getInv(){
         return this.backpack;
     }
@@ -176,6 +181,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
                 } else {
                     this.HP += this.backpack.getFirstAppleInItem().getHeal();
                     this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+                    System.out.println("You use your " + item);
                 }  
         }
         else{ 
@@ -185,6 +191,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
                 } else {
                     this.HP += this.backpack.getFirstHealPotionInItem().getHeal();
                     this.backpack.delItems(this.backpack.getFirstInstanceItems(item));
+                    System.out.println("You use your " + item);
                 }   
              }
              else{

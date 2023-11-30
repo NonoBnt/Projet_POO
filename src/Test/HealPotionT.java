@@ -4,7 +4,7 @@ import items.HealPotion;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class HealPotionT(){
+public class HealPotionT{
     
     @Test
     public void testObjectHealPotion(){

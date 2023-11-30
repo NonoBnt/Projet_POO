@@ -4,12 +4,12 @@ import items.Weapon;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class WeaponT(){
+public class WeaponT{
 
     @Test
     public void testLoseDurability(){
         Weapon weapon1 = new Weapon("test", 20, 20, 20);
-        weapon1.loseDurability()
+        weapon1.loseDurability();
         assertEquals(weapon1.getDurability(), 19);
     }
 

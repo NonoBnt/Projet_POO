@@ -21,6 +21,10 @@ public class Chest extends PNJ {
     public void setHP(int i) {
         this.HP = i;
     }
+    @Override
+    public Armor getShield(){
+        return null;
+    }
 
     public Items getItem(){
         if (this.chestitItems == null){
@@ -32,6 +36,15 @@ public class Chest extends PNJ {
         }
     }
 
+    public void delItems(){
+        if(this.chestitItems != null){
+            this.chestitItems = null;
+            System.out.println("you took the Chest item");
+        } else{
+            System.out.println("The chest still has the item");
+        }
+    }
+
 	public void interact() {
 		System.out.println("Cling Cling(Traduction : this item is yours only if you want!)");
 	}
@@ -39,7 +52,7 @@ public class Chest extends PNJ {
     public String toString(){
         String s;
         if(this.HP <= 0){
-            s = "DEAD ";
+            s = "DEAD";
         }else{
             s = this.name + " : " + this.HP + " HP ";
         }
