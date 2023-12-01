@@ -29,10 +29,10 @@ public class Inventory {
         return res;
     }
     public boolean isTooMuchWeight(){
-        return getTotalWeight() > MAX_WEIGHT;
+        return getTotalWeight() > this.max_weight;
     }
     public boolean isTooMuchWeight(Items i){
-        return (getTotalWeight() + i.getWeight()) >= MAX_WEIGHT;
+        return (getTotalWeight() + i.getWeight()) >= this.max_weight;
     }
     public int getSpace(){
         return this.length;
@@ -78,15 +78,14 @@ public class Inventory {
         }return ret;
     }
 
-     public void delFirstKey(){
+    public void delFirstKey(){
         Items key = getFirstInstanceItems("Key");
-        if (!this.items.remove(key)){
+        if (this.items.remove(key) == false){
             System.out.println("There is not an item like this in your backpack");
         }else{
             this.items.remove(key);
             length -= 1;
         }
-
     }
 
     public boolean isWeaponInInv(){

@@ -58,6 +58,9 @@ public class Hero extends Characters implements Attack, Use, Talk{
     public Armor getShield(){
         return this.shield;
     }
+    public Weapon getWeapon(){
+        return this.weapon;
+    }
 
     public Inventory getInv(){
         return this.backpack;
@@ -199,7 +202,7 @@ public class Hero extends Characters implements Attack, Use, Talk{
              }
         }
     }
-    public void setWeapon(Items i){
+    public void setWeapon(Items i){//ajouter un if pour les deux fonction 
         this.weapon = (Weapon)i;
     }
     public void setArmor(Items i){

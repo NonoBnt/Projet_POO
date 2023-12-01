@@ -240,7 +240,7 @@ public class Game{
         S22.addExits(S23, EXT23);
     }
 
-    public void take(Items i){
+    /*public void take(Items i){
         Inventory Inv = this.hero.getInv();
         if (this.hero.getInv().isFull()){
             System.out.println("There is no more space in your backpack");
@@ -250,7 +250,7 @@ public class Game{
         }else{
             Inv.addItems(i);
         }
-    }
+    }*/
     public void quit(){
         this.stop = true;
     }

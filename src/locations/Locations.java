@@ -2,24 +2,16 @@ package locations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-
-import characters.Boss;
-import characters.Characters;
-import characters.Chest;
-import characters.Human;
-import characters.Monster;
-import characters.Hero;
-
+import characters.*;
 
 public class Locations {
     private static final boolean DEFAULT_STATE = true;
     private final String Name;
     private final String Description;
     private Map<String,Exits> exits = new HashMap<>();
-    private List<Characters> peoples ;
+    private ArrayList<Characters> peoples ;
     private boolean state;
 
     public Locations(String name){
@@ -68,7 +60,7 @@ public class Locations {
     public Map<String,Exits> getExits(){
         return exits;
     }
-    public List<Characters> getCharacters(){
+    public ArrayList<Characters> getCharacters(){
         return this.peoples;
     }
     public Hero getHero(){

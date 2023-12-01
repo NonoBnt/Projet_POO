@@ -73,20 +73,95 @@ public class InventoryT{
         Inventory inv1 = new Inventory();
         assertEquals(inv1.getWeightLeft(),100);
     }
+    @Test
     public void testgetWeightLeft2(){
         Inventory inv1 = new Inventory();
         inv1.addItems(new Weapon("test", 5, 1, 0));
         assertEquals(inv1.getWeightLeft(),95);
     }
+    @Test
     public void testIsKey1(){
         Inventory inv1 = new Inventory();
         assertFalse(inv1.isKey());
     }
+    @Test
     public void testIsKey2(){
         Inventory inv1 = new Inventory();
         inv1.addItems(new Exitkey());
         assertTrue(inv1.isKey());
     }
-
-
+    @Test
+    public void testGetFirstAppleInItem1(){
+        Inventory inv1 = new Inventory();
+        assertNull(inv1.getFirstAppleInItem());
+    }
+    @Test
+    public void testGetFirstAppleInItem2(){
+        Inventory inv1 = new Inventory();
+        Apple ap1 = new Apple();
+        inv1.addItems(ap1);
+        assertEquals(inv1.getFirstAppleInItem(), ap1);
+    }
+    @Test
+    public void testGetFirstHealPotionInItem1(){
+        Inventory inv1 = new Inventory();
+        assertNull(inv1.getFirstHealPotionInItem());
+    }
+    @Test
+    public void testGetFirstHealPotionInItem2(){
+        Inventory inv1 = new Inventory();
+        HealPotion hp1 = new HealPotion();
+        inv1.addItems(hp1);
+        assertEquals(inv1.getFirstHealPotionInItem(), hp1);
+    }
+    @Test
+    public void testGetFirstInstanceItems1(){
+        Inventory inv1 = new Inventory();
+        String s = "test";
+        assertNull(inv1.getFirstInstanceItems(s));
+    }
+    @Test
+    public void testGetFirstInstanceItems2(){
+        Inventory inv1 = new Inventory();
+        HealPotion hp1 = new HealPotion();
+        inv1.addItems(hp1);
+        String s = "Heal_Potion";
+        assertEquals(inv1.getFirstInstanceItems(s), hp1);
+    }
+    @Test
+    public void testIsWeaponInInv1(){
+        Inventory inv1 = new Inventory();
+        assertFalse(inv1.isWeaponInInv());
+    }
+    @Test
+    public void testIsWeaponInInv2(){
+        Inventory inv1 = new Inventory();
+        inv1.addItems(new Weapon("test", 20, 20, 20));
+        assertTrue(inv1.isWeaponInInv());
+    }
+     @Test
+    public void testIsShieldInInv1(){
+        Inventory inv1 = new Inventory();
+        assertFalse(inv1.isShieldInInv());
+    }
+    @Test
+    public void testIsShieldInInv2(){
+        Inventory inv1 = new Inventory();
+        inv1.addItems(new Armor("test", 20, 20, 20));
+        assertTrue(inv1.isShieldInInv());
+    }
+    @Test
+    public void testDellItems(){
+        Inventory inv1 = new Inventory();
+        Armor ar1 = new Armor("test", 20, 20, 20);
+        inv1.addItems(ar1);
+        inv1.delItems(ar1);
+        assertEquals(inv1.getSpaceLeft(), 15);
+    }
+    @Test
+    public void testAddItems(){
+        Inventory inv1 = new Inventory();
+        inv1.addItems(new Armor("test", 20, 20, 20));
+        assertEquals(inv1.getSpaceLeft(), 14);
+    }
 }

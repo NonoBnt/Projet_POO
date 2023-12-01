@@ -5,4 +5,7 @@ public abstract class Consumable extends Items {
     private int weight;
     private int durability;
 
+    public abstract int getWeight();
+    public abstract String getName();
+
 }
