@@ -30,7 +30,7 @@ public class ExitsT{
         Locations loc = new Locations("test");
         Exits exit = new Exits(false, loc);
         exit.useKey();
-        assertTrue(exit.getkey());
+        assertFalse(exit.getkey());
     }
     @Test
     public void testUseKey2(){

@@ -10,11 +10,12 @@ public class Locations {
     private static final boolean DEFAULT_STATE = true;
     private final String Name;
     private final String Description;
-    private Map<String,Exits> exits = new HashMap<>();
+    private Map<String,Exits> exits ;
     private ArrayList<Characters> peoples ;
     private boolean state;
 
     public Locations(String name){
+        this.exits = new HashMap<>();
         this.Name = name;
         this.Description ="You’re in "+name+", what do you want to do?";
         this.state = DEFAULT_STATE;
@@ -26,6 +27,7 @@ public class Locations {
         this.Description ="You’re in "+name+", what do you want to do?";
         this.state = state;
         this.peoples = new ArrayList<>(2);
+        this.exits = new HashMap<>();
     }
 
     // Les fonctions add/del 

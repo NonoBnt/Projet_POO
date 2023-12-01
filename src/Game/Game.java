@@ -286,7 +286,7 @@ public class Game{
                     }                    
                     break;
                 case "HELP":
-                    if((arg.length) > 1 ){
+                    if((arg.length) == 1 ){
                         System.out.println("In this room you can use command :");
                         if(this.hero.getHeroLoc().getExits() != null){
                             System.out.println("- GO arg1 (arg1 is the number of the next room you want and can go)");    
@@ -388,7 +388,7 @@ public class Game{
                                     if (this.hero.getInv().isFull()){
                                         System.out.println("There is no more space in your backpack you can use DELETE to have more space in it");
                                     }
-                                    else if(this.hero.getInv().isTooMuchWeight(lochero.getChestInLoc(lochero).getItem())){
+                                    else if(this.hero.getInv().isTooMuchWeight(lochero.getHumanInLoc(lochero).getInv().getItems().get(0))){
                                         System.out.println("you're not strong enough to lift your backpack you can use DELETE to have more space in it");
                                     }else{
                                         this.hero.getInv().addItems(lochero.getHumanInLoc(lochero).getInv().getItems().get(0));
@@ -472,6 +472,8 @@ public class Game{
                         }else{
                             if((lochero).isHumanInLoc() == true && lochero.getHumanInLoc(lochero).getHP() <= 0 || lochero.isChestInLoc() == true && lochero.getChestInLoc(lochero).getHP() <= 0){
                                 System.out.print("A deafening silence still in this room.");
+                            } else {
+                                System.out.println("The Monster said GEGRJSyGA, but you didn't understand");
                             }
                         }
                     }

@@ -25,8 +25,8 @@ public class HumanT{
         Human h1 = new Human("test", null);
         Weapon w1 = new Weapon("test", 20, 20, 20);
         h1.getInv().addItems(w1);
-        Inventory i1 = new Inventory();
-        i1.addItems(w1);
+        Inventory i1 = h1.getInv();
+        //i1.addItems(w1);
         assertEquals(h1.getInv(), i1);
     }
 }

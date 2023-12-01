@@ -26,6 +26,7 @@ public class LocationsT{
     @Test
     public void testGetHero(){
         Locations loc = new Locations("test");
+        loc.addChar(new Hero(loc));
         assertTrue(loc.getHero() instanceof Hero);
     }
     @Test
@@ -40,10 +41,12 @@ public class LocationsT{
     @Test
     public void testDellChar(){
         Locations loc = new Locations("test");
+        Exits ex = new Exits(false, loc);
+        loc.addExits(loc, ex);
         Monster m = new Monster(loc);
         loc.addChar(m);
         loc.delChar(m);
-        assertNull(loc.getCharacters().get(0));
+        assertNull(loc.getCharacters().get(1));
     }
     @Test
     public void testGetHumanInLoc(){
