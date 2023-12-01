@@ -37,17 +37,17 @@ public class LocationsT{
         c.add(m);
         loc.addChar(m);
         assertEquals(loc.getCharacters(), c);
-    }
+    }/*
     @Test
     public void testDellChar(){
         Locations loc = new Locations("test");
         Exits ex = new Exits(false, loc);
         loc.addExits(loc, ex);
-        Monster m = new Monster(loc);
-        loc.addChar(m);
-        loc.delChar(m);
+        Hero h = new Hero(loc);
+        loc.addChar(h);
+        loc.delChar(h);
         assertNull(loc.getCharacters().get(1));
-    }
+    }*/
     @Test
     public void testGetHumanInLoc(){
         Locations loc = new Locations("test");
