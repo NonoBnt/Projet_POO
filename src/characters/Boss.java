@@ -5,8 +5,8 @@ import items.*;
 public class Boss extends Characters{
     private static final int MIN_HP = 75;
     private static final int MAX_HP = 200;
-    private static final int MIN_DAMAGE = 20;
-    private static final int MAX_DAMAGE = 50;
+    private static final int MIN_DAMAGE = 15;
+    private static final int MAX_DAMAGE = 35;
     private int HP;
     private final String name = "Boss";
     private int damage;
